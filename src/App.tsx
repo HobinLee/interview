@@ -1,15 +1,18 @@
-import React, { ReactElement } from 'react';
+import { ReactElement } from 'react';
+import { Route, Routes } from 'react-router-dom';
 
-import Icon from '../public/assets/icon.svg';
+import { InterviewRoom, ReviewRoom, SettingRoom, WaitingRoom } from './pages';
 
-interface Props {}
-
-function App({}: Props): ReactElement {
+function App(): ReactElement {
   return (
-    <>
-      <h1>Let's Start New Project!</h1>
-      <Icon />
-    </>
+    <div className="App">
+      <Routes>
+        <Route path="/" element ={<WaitingRoom />}/>
+        <Route path="/interview" element={<InterviewRoom/>}/>
+        <Route path="/review" element={<ReviewRoom/>}/>
+        <Route path="/setting" element={<SettingRoom/>}/>
+      </Routes>
+    </div>
   );
 }
 
