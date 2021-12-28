@@ -2,10 +2,10 @@ import { SettingRoomWrapper } from "./style";
 import QuestionList from "./QuestionList";
 import { useRecoilValue } from "recoil";
 import { questionSetKeyState } from "../../store/question";
-import { useEffect } from "react";
+import { FC, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-const SettingRoom = () => {
+const SettingRoom: FC = () => {
   const questionSetKey = useRecoilValue(questionSetKeyState);
   useEffect(() => {
     console.log(questionSetKey);

@@ -1,7 +1,8 @@
+import { FC } from "react";
 import { Link } from "react-router-dom";
 import { WaitingRoomWrapper } from "./style";
 
-const WaitingRoom = () => <WaitingRoomWrapper>
+const WaitingRoom: FC = () => <WaitingRoomWrapper>
   <div className="question-set">
     <Link to="/setting">
       질문 목록 수정

@@ -1,4 +1,4 @@
-import {useEffect, useState } from "react";
+import {FC, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { InterviewRoomWrapper } from "./style";
 import { MdCallEnd } from "react-icons/md";
@@ -28,7 +28,7 @@ const getQuestions = ({ essential, random }: MiddleQuestions): Question[] => {
 }
 
 
-const InterviewRoom = () => {
+const InterviewRoom: FC = () => {
   const questionSetKey = useRecoilValue<QuestionSetKey>(questionSetKeyState);
   const [questions, setQuestions] = useRecoilState<Question[]>(questionState);
   const [answerList, setAnswerList] = useRecoilState<Answer[]>(answerState);

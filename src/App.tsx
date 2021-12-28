@@ -1,9 +1,9 @@
-import { ReactElement } from 'react';
+import { FC, ReactElement } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import { InterviewRoom, ReviewRoom, SettingRoom, WaitingRoom } from './pages';
 
-function App(): ReactElement {
+export const App: FC = () => {
   return (
     <div className="App">
       <Routes>
@@ -15,5 +15,3 @@ function App(): ReactElement {
     </div>
   );
 }
-
-export default App;

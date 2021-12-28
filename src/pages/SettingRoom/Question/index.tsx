@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FC, useState } from "react";
 import { useInput } from "../../../hooks";
 import { Question } from "../../../store/question";
 import { QuestionElementWrapper } from "./style";
@@ -9,7 +9,7 @@ type QuestionProps = {
   deleteQuestion: () => void;
 }
 
-const QuestionElement = ({question, modifyQuestion, deleteQuestion}: QuestionProps) => {
+const QuestionElement: FC<QuestionProps> = ({question, modifyQuestion, deleteQuestion}) => {
   const [isModify, setModify] = useState(false);
   const {
     value: modifiedQuestion,

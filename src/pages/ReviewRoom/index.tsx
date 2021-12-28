@@ -1,9 +1,10 @@
+import { FC } from "react";
 import { Link } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { Answer, answerState } from "../../store/question";
 import { ReviewRoomWrapper } from "./style";
 
-const ReviewRoom = () => {
+const ReviewRoom: FC = () => {
   const answers: Answer[] = useRecoilValue<Answer[]>(answerState);
 
   const answerList = answers.map((answer, idx) =>  <tr>

@@ -1,6 +1,6 @@
 import { Question, QuestionSet, QuestionSetKey, questionSetKeyState } from "../../../store/question";
 import { QuestionListWrapper } from "./style";
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { useInput } from "../../../hooks";
 import QuestionElement from "../Question";
@@ -17,7 +17,7 @@ const typeName = {
   'end': '마무리 질문'
 }
 
-const QuestionList = ({ type }: QuestionListProps) => {
+const QuestionList: FC<QuestionListProps> = ({ type }) => {
   const {value: newQuestion, onChange, setValue} = useInput('');
   const questionSet: QuestionSetKey = useRecoilValue(questionSetKeyState);
 

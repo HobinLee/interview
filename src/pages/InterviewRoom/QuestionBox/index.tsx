@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { Question, Seconds } from "../../../store/question";
 import { QuestionBoxWrapper } from "./style";
 
@@ -10,7 +10,7 @@ type QuestionBoxProps = {
 const STAND_BY_SECONDS = 3;
 const ONE_SECOND = 1000;
 
-const QuestionBox = ({ question, setStandby }:QuestionBoxProps) => {
+const QuestionBox: FC<QuestionBoxProps> = ({ question, setStandby }) => {
   const [timer, setTimer] = useState<Seconds>(STAND_BY_SECONDS);
   useEffect(() => {
     setTimer(STAND_BY_SECONDS);

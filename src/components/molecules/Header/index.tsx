@@ -1,7 +1,8 @@
+import { FC } from "react";
 import { Link } from "react-router-dom";
 import style from 'styled-components';
 
-const Header = () => <HeaderWrapper> <Link to="/">홈으로</Link> </HeaderWrapper>
+const Header: FC = () => <HeaderWrapper> <Link to="/">홈으로</Link> </HeaderWrapper>
 
 export default Header;
 
