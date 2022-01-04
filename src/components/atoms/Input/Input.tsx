@@ -1,5 +1,5 @@
 import { FontSize, Color, colors } from '@src/styles/variables';
-import { ButtonHTMLAttributes, FC, InputHTMLAttributes } from 'react';
+import { FC, InputHTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
 
 interface InputProps {

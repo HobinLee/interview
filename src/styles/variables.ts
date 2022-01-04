@@ -13,5 +13,14 @@ export const colors = {
   lightGray: '#fefefe',
 };
 
+export const borders = {
+  round: '50%',
+  small: '2px',
+  normal: '4px',
+  large: '8px',
+  none: '0',
+};
+
 export type Color = keyof typeof colors;
 export type FontSize = keyof typeof sizes.font;
+export type BorderRadius = keyof typeof borders;
