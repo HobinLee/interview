@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 export type InputType = {
   value: string;
@@ -12,10 +12,10 @@ export type InputType = {
 
 export default (
   defaultValue: string,
-  filter?: (text: string) => string
+  filter?: (text: string) => string,
 ): InputType => {
   const [value, setValue] = useState(
-    filter ? filter(defaultValue) : defaultValue
+    filter ? filter(defaultValue) : defaultValue,
   );
 
   const onChange = ({
