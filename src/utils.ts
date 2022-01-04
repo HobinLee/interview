@@ -1,4 +1,4 @@
-export function shuffle<T> (arr: T[]): T[] {
+export function shuffle<T>(arr: T[]): T[] {
   const length = arr.length;
 
   arr.forEach((element: T, idx: number) => {
@@ -12,6 +12,6 @@ export function shuffle<T> (arr: T[]): T[] {
 }
 
 //질문 n개 뽑기
-export function draw<T> (arr: T[], n: number): T[] {
+export function draw<T>(arr: T[], n: number): T[] {
   return shuffle(arr).slice(0, n);
 }

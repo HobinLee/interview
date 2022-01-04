@@ -1,4 +1,4 @@
-import style from "styled-components";
+import style from 'styled-components';
 
 export const QuestionElementWrapper = style.li`
   height: 3rem;
@@ -9,4 +9,4 @@ export const QuestionElementWrapper = style.li`
   > button {
     margin-left: 1rem;
   }
-`
+`;

@@ -1,4 +1,4 @@
-import style from "styled-components";
+import style from 'styled-components';
 
 export const ReviewRoomWrapper = style.main`
  font-size: 2.8rem;
@@ -6,4 +6,4 @@ export const ReviewRoomWrapper = style.main`
    margin: auto;
    border: 1px solid black;
  }
-`
+`;

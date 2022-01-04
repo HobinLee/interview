@@ -1,4 +1,4 @@
-import style from "styled-components";
+import style from 'styled-components';
 
 export const WaitingRoomWrapper = style.main`
   display: flex;
@@ -61,4 +61,4 @@ export const WaitingRoomWrapper = style.main`
       }
     }
   }
-`
+`;

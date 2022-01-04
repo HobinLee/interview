@@ -1,4 +1,4 @@
-import style from "styled-components";
+import style from 'styled-components';
 
 export const QuestionListWrapper = style.main`
   display: flex;
@@ -35,4 +35,4 @@ export const QuestionListWrapper = style.main`
     margin-top: 2rem;
     margin-bottom: 4rem;
   }
-`
+`;

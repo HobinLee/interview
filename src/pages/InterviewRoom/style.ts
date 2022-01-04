@@ -1,4 +1,4 @@
-import style from "styled-components";
+import style from 'styled-components';
 
 export const InterviewRoomWrapper = style.main`
   background: #333;
@@ -111,4 +111,4 @@ export const InterviewRoomWrapper = style.main`
     bottom: 2rem;
     color: white;
   }
-`
+`;

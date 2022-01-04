@@ -1,34 +1,34 @@
-import { atom, RecoilState } from "recoil";
+import { atom, RecoilState } from 'recoil';
 
 export type Question = string;
 
 export type QuestionSet = {
-  begin: Question[],
-  essential: Question[],
-  random: Question[],
-  end: Question[]
-}
+  begin: Question[];
+  essential: Question[];
+  random: Question[];
+  end: Question[];
+};
 
 export const questionState = atom<Question[]>({
-  key: "question",
-  default: []
+  key: 'question',
+  default: [],
 });
 
 export type Seconds = number;
 
 export type Answer = {
-  question: Question,
-  time: Seconds
-}
+  question: Question;
+  time: Seconds;
+};
 
 export const answerState = atom<Answer[]>({
-  key: "result",
-  default: []
-})
+  key: 'result',
+  default: [],
+});
 
 export type QuestionSetKey = string;
 
 export const questionSetKeyState = atom<QuestionSetKey>({
-  key: "questionSetKey",
-  default: "default"
+  key: 'questionSetKey',
+  default: 'default',
 });

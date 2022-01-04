@@ -1,4 +1,4 @@
-import style from "styled-components";
+import style from 'styled-components';
 
 export const SettingRoomWrapper = style.main`
   display: flex;
@@ -15,4 +15,4 @@ export const SettingRoomWrapper = style.main`
   }
 
   font-size: 2rem;
-`
+`;
