@@ -35,7 +35,7 @@ module.exports = {
         use: ['@svgr/webpack'],
       },
       {
-        test: /\.(png|jp(e*)g)$/,
+        test: /\.(png|jp(e*)g|mp3)$/,
         loader: 'file-loader',
         options: {
           name: 'asset/[name].[ext]?[hash]',

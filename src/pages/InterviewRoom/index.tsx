@@ -16,7 +16,7 @@ import {
   QuestionSetKey,
 } from '../../store/question';
 import QuestionBox from './QuestionBox';
-//import { enter } from "../../assets/audios/enter.mp3"
+import EnterSFX from '../../assets/audios/enter.mp3';
 import StartButton from './StartButton';
 import { draw, shuffle } from '../../utils/utils';
 
@@ -92,7 +92,7 @@ const InterviewRoom: FC = () => {
 
   return (
     <InterviewRoomWrapper>
-      {/* <audio src={enter} autoPlay/> */}
+      <audio src={EnterSFX} autoPlay />
       <div className="interviewers">
         <div className="interviewer">
           <div className="profile"></div>
