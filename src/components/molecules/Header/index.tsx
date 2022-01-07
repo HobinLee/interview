@@ -4,8 +4,7 @@ import style from 'styled-components';
 
 const Header: FC = () => (
   <HeaderWrapper>
-    {' '}
-    <Link to="/">홈으로</Link>{' '}
+    <Link to="/">홈으로</Link>
   </HeaderWrapper>
 );
 

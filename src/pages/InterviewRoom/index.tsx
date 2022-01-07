@@ -18,7 +18,7 @@ import {
 import QuestionBox from './QuestionBox';
 //import { enter } from "../../assets/audios/enter.mp3"
 import StartButton from './StartButton';
-import { draw, shuffle } from '../../utils';
+import { draw, shuffle } from '../../utils/utils';
 
 const MILLSEC_PER_SEC: number = 1000;
 
