@@ -4,6 +4,7 @@ import {
   colors,
   BorderRadius,
   borders,
+  sizes,
 } from '@src/styles/variables';
 import { ButtonHTMLAttributes, FC } from 'react';
 import styled, { css } from 'styled-components';
@@ -27,6 +28,7 @@ export const Button: FC<
   borderRadius = 'small',
   children,
   onClick,
+  disabled,
 }) => (
   <ButtonWrap
     onClick={onClick}
@@ -36,6 +38,7 @@ export const Button: FC<
     isFilled={isFilled ?? false}
     block={block}
     borderRadius={borderRadius}
+    disabled={disabled}
   >
     {children}
   </ButtonWrap>
@@ -56,9 +59,12 @@ const strokeStyle = (color: Color) => css`
 
 const ButtonWrap = styled.button<Required<ButtonProps>>`
   ${({ fontSize, color, isFilled, block, borderRadius }) => css`
-    font-size: ${fontSize};
+    transition: 0.5s;
+
+    box-sizing: border-box;
+    font-size: ${sizes.font[fontSize]};
     outline: none;
-    padding: 0.5em 1em;
+    padding: 0.5rem 1rem;
     cursor: pointer;
     border-radius: ${borders[borderRadius]};
     ${isFilled ? strokeStyle(color) : outlineStyle(color)}
@@ -67,13 +73,20 @@ const ButtonWrap = styled.button<Required<ButtonProps>>`
       width: 100%;
     `};
 
-    &: hover {
-      ${isFilled
-        ? css`
-            opacity: 0.8;
-          `
-        : strokeStyle(color)}
-      opacity: 0.8;
+    &:enabled {
+      &:hover {
+        ${isFilled
+          ? css`
+              opacity: 0.8;
+            `
+          : strokeStyle(color)}
+        opacity: 0.8;
+      }
+    }
+
+    &:disabled {
+      opacity: 0.3;
+      cursor: default;
     }
   `}
 `;

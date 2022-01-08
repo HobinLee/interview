@@ -1,8 +1,9 @@
 export const sizes = {
   font: {
-    small: '12px',
-    default: '14px',
-    large: '16px',
+    small: '0.8rem',
+    normal: '1rem',
+    default: '1rem',
+    large: '1.2rem',
   },
 };
 
@@ -10,8 +11,8 @@ export const colors = {
   black: '#333',
   white: '#fff',
   darkGray: '#666',
-  gray: '#eee',
-  lightGray: '#fefefe',
+  gray: '#ccc',
+  lightGray: '#eee',
   red: '#c14e4e',
   green: '#7fb198',
   blue: '#5e5edb',
@@ -28,3 +29,5 @@ export const borders = {
 export type Color = keyof typeof colors;
 export type FontSize = keyof typeof sizes.font;
 export type BorderRadius = keyof typeof borders;
+export type FontWeight = 'normal' | 'bold' | 'light' | 'default';
+export type TextAlign = 'left' | 'center' | 'right';
