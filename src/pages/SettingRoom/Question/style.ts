@@ -1,12 +1,20 @@
-import style from 'styled-components';
+import styled from 'styled-components';
 
-export const QuestionElementWrapper = style.li`
-  height: 3rem;
+export const QuestionElementWrapper = styled.li`
+  margin-top: 0.5rem;
+  height: 2rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  > button {
-    margin-left: 1rem;
+
+  .buttons-wrapper {
+    width: auto;
+    min-width: 120px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    margin-left: 0.7rem;
   }
 `;

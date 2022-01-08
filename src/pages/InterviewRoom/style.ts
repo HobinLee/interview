@@ -1,6 +1,6 @@
-import style from 'styled-components';
+import styled from 'styled-components';
 
-export const InterviewRoomWrapper = style.main`
+export const InterviewRoomWrapper = styled.main`
   background: #333;
   color: #fff;
   width: 100vw;
@@ -31,7 +31,7 @@ export const InterviewRoomWrapper = style.main`
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      text-align: center
+      text-align: center;
     }
   }
 
@@ -43,7 +43,7 @@ export const InterviewRoomWrapper = style.main`
     background: #222;
     border-radius: 2rem;
   }
- 
+
   .footer {
     justify-self: flex-end;
     position: absolute;
@@ -59,7 +59,7 @@ export const InterviewRoomWrapper = style.main`
       svg {
         width: 2rem;
         height: 2rem;
-        > polyline { 
+        > polyline {
           stroke: #fff;
         }
       }
@@ -91,7 +91,6 @@ export const InterviewRoomWrapper = style.main`
     }
 
     .close-button {
-
       background: #ea4335;
     }
 

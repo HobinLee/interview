@@ -1,6 +1,6 @@
-import style from 'styled-components';
+import styled from 'styled-components';
 
-export const WaitingRoomWrapper = style.main`
+export const WaitingRoomWrapper = styled.main`
   display: flex;
   flex-direction: column;
 
@@ -22,7 +22,7 @@ export const WaitingRoomWrapper = style.main`
     display: flex;
     align-items: center;
     justify-content: center;
-    
+
     &__content {
       display: flex;
       > div {

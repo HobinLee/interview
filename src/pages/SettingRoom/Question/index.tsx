@@ -1,5 +1,6 @@
 import { Button } from '@src/components/atoms/Button/Button';
 import { Input } from '@src/components/atoms/Input/Input';
+import { Typography } from '@src/components/atoms/Typography/Typography';
 import { FC, useState } from 'react';
 import { useInput } from '../../../hooks';
 import { Question } from '../../../store/question';
@@ -43,13 +44,14 @@ const QuestionElement: FC<QuestionProps> = ({
         <Input
           value={modifiedQuestion}
           onChange={handleModifiedQuestion}
-          placeholder="질문들 입력해주세요"
+          placeholder="질문을 입력해주세요"
+          fontSize="small"
         ></Input>
-        <div>
-          <Button onClick={handleConfirmModify} color="blue">
+        <div className="buttons-wrapper">
+          <Button onClick={handleConfirmModify} color="blue" fontSize="small">
             수정
           </Button>
-          <Button onClick={handleCancelModify} color="gray">
+          <Button onClick={handleCancelModify} color="gray" fontSize="small">
             취소
           </Button>
         </div>
@@ -59,12 +61,14 @@ const QuestionElement: FC<QuestionProps> = ({
 
   return (
     <QuestionElementWrapper>
-      <h5>{question}</h5>
-      <div>
-        <Button onClick={handleModify} color="blue">
+      <Typography ellipsis fontWeight="default">
+        {question}
+      </Typography>
+      <div className="buttons-wrapper">
+        <Button onClick={handleModify} color="blue" fontSize="small">
           수정
         </Button>
-        <Button onClick={deleteQuestion} color="red">
+        <Button onClick={deleteQuestion} color="red" fontSize="small">
           삭제
         </Button>
       </div>

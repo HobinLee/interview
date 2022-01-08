@@ -11,17 +11,30 @@ import { useInput } from '../../../hooks';
 import QuestionElement from '../Question';
 import { Input } from '@src/components/atoms/Input/Input';
 import { Button } from '@src/components/atoms/Button/Button';
+import { Typography } from '@src/components/atoms/Typography/Typography';
 
-type QuestionType = 'begin' | 'essential' | 'random' | 'end';
-type QuestionListProps = {
-  type: QuestionType;
+const questionTypeInfo = {
+  begin: {
+    title: '시작 질문',
+    indication: '모든 질문이 처음에 순서대로 나옵니다',
+  },
+  essential: {
+    title: '필수 질문',
+    indication: '모든 질문이 기타 질문과 함께 섞여 무작위로 나옵니다',
+  },
+  random: {
+    title: '기타 질문',
+    indication: '일부 질문이 필수 질문과 섞여 무작위로 나옵니다',
+  },
+  end: {
+    title: '마무리 질문',
+    indication: '모든 질문이 마지막에 순서대로 나옵니다',
+  },
 };
 
-const typeName = {
-  begin: '시작 질문',
-  essential: '필수 질문',
-  random: '기타 질문',
-  end: '마무리 질문',
+type QuestionType = keyof typeof questionTypeInfo;
+type QuestionListProps = {
+  type: QuestionType;
 };
 
 const QuestionList: FC<QuestionListProps> = ({ type }) => {
@@ -67,19 +80,32 @@ const QuestionList: FC<QuestionListProps> = ({ type }) => {
   return (
     <QuestionListWrapper>
       <div className="title">
-        <h4>{typeName[type]}</h4>
-        <div className="add-question-button">
-          <Input
-            onChange={onChange}
-            value={newQuestion}
-            placeholder="질문들 입력해주세요"
-          />
-          <Button onClick={handleAddQuestion} color="green">
-            추가
-          </Button>
-        </div>
+        <Typography heading="h4">{questionTypeInfo[type].title}</Typography>
+        <Typography color="gray" fontSize="small">
+          * {questionTypeInfo[type].indication}
+        </Typography>
       </div>
-      <ul className="list">{questionList}</ul>
+      <ul className="list">
+        <li>
+          <div className="add-question-button">
+            <Input
+              onChange={onChange}
+              value={newQuestion}
+              placeholder="질문을 입력해주세요"
+              fontSize="small"
+            />
+            <Button
+              onClick={handleAddQuestion}
+              color="green"
+              fontSize="small"
+              disabled={!newQuestion.length}
+            >
+              추가
+            </Button>
+          </div>
+        </li>
+        {questionList}
+      </ul>
     </QuestionListWrapper>
   );
 };

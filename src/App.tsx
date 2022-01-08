@@ -1,4 +1,4 @@
-import { FC, ReactElement } from 'react';
+import { FC } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import { InterviewRoom, ReviewRoom, SettingRoom, WaitingRoom } from './pages';

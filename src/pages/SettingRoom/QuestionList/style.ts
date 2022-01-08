@@ -1,13 +1,15 @@
-import style from 'styled-components';
+import styled from 'styled-components';
 
-export const QuestionListWrapper = style.main`
+export const QuestionListWrapper = styled.div`
+  background-color: white;
   display: flex;
   flex-direction: column;
   font-size: 2rem;
   align-items: flex-start;
+  padding: 1rem;
+  border-radius: 1rem;
   justify-content: center;
-  width: 100%;
-  min-width: 50rem;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 2px 3px;
 
   .title {
     width: 100%;
@@ -15,14 +17,13 @@ export const QuestionListWrapper = style.main`
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    h4 {
-      margin: 0;
-      margin-right: 1rem;
-    }
-    input {
-      width: 30rem;
-      margin-right: 1rem;
-    }
+  }
+
+  .add-question-button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
   }
 
   .list {
@@ -30,9 +31,13 @@ export const QuestionListWrapper = style.main`
     flex-direction: column;
     box-sizing: border-box;
     padding: 0;
-    padding-left: 2rem;
+    padding-left: 1rem;
     width: 100%;
-    margin-top: 2rem;
-    margin-bottom: 4rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  & + & {
+    margin-top: 1rem;
   }
 `;
