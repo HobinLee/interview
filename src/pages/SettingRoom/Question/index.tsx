@@ -1,4 +1,5 @@
 import { Button } from '@src/components/atoms/Button/Button';
+import { Input } from '@src/components/atoms/Input/Input';
 import { FC, useState } from 'react';
 import { useInput } from '../../../hooks';
 import { Question } from '../../../store/question';
@@ -39,13 +40,18 @@ const QuestionElement: FC<QuestionProps> = ({
   if (isModify) {
     return (
       <QuestionElementWrapper>
-        <input
+        <Input
           value={modifiedQuestion}
           onChange={handleModifiedQuestion}
-        ></input>
+          placeholder="질문들 입력해주세요"
+        ></Input>
         <div>
-          <Button onClick={handleConfirmModify}>수정 완료</Button>
-          <Button onClick={handleCancelModify}>수정 취소</Button>
+          <Button onClick={handleConfirmModify} color="blue">
+            수정
+          </Button>
+          <Button onClick={handleCancelModify} color="gray">
+            취소
+          </Button>
         </div>
       </QuestionElementWrapper>
     );
@@ -55,8 +61,12 @@ const QuestionElement: FC<QuestionProps> = ({
     <QuestionElementWrapper>
       <h5>{question}</h5>
       <div>
-        <Button onClick={handleModify}>수정</Button>
-        <Button onClick={deleteQuestion}>삭제</Button>
+        <Button onClick={handleModify} color="blue">
+          수정
+        </Button>
+        <Button onClick={deleteQuestion} color="red">
+          삭제
+        </Button>
       </div>
     </QuestionElementWrapper>
   );

@@ -9,6 +9,8 @@ import { FC, useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { useInput } from '../../../hooks';
 import QuestionElement from '../Question';
+import { Input } from '@src/components/atoms/Input/Input';
+import { Button } from '@src/components/atoms/Button/Button';
 
 type QuestionType = 'begin' | 'essential' | 'random' | 'end';
 type QuestionListProps = {
@@ -67,8 +69,14 @@ const QuestionList: FC<QuestionListProps> = ({ type }) => {
       <div className="title">
         <h4>{typeName[type]}</h4>
         <div className="add-question-button">
-          <input onChange={onChange} value={newQuestion} />
-          <button onClick={handleAddQuestion}>추가</button>
+          <Input
+            onChange={onChange}
+            value={newQuestion}
+            placeholder="질문들 입력해주세요"
+          />
+          <Button onClick={handleAddQuestion} color="green">
+            추가
+          </Button>
         </div>
       </div>
       <ul className="list">{questionList}</ul>
