@@ -9,6 +9,6 @@ module.exports = merge(common, {
   devtool: 'inline-source-map',
   devServer: {
     port: PORT,
-    proxy: {},
+    historyApiFallback: true,
   },
 });
