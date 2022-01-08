@@ -10,7 +10,11 @@ export const colors = {
   black: '#333',
   white: '#fff',
   darkGray: '#666',
+  gray: '#eee',
   lightGray: '#fefefe',
+  red: '#c14e4e',
+  green: '#7fb198',
+  blue: '#5e5edb',
 };
 
 export const borders = {
