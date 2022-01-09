@@ -71,6 +71,7 @@ const InterviewRoom: FC = () => {
   };
 
   const startQuestion = () => {
+    setAnswerList([]);
     setQuestions(shuffleQuestion);
     setStart(true);
   };
