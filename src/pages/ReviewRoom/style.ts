@@ -10,8 +10,8 @@ export const ReviewRoomWrapper = styled.main`
   min-height: 100vh;
   background-color: ${colors.lightGray};
 
-  .review-table {
-    margin: auto;
-    border: 1px solid black;
+  .review-room {
+    width: 100%;
+    max-width: 600px;
   }
 `;

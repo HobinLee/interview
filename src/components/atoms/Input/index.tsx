@@ -5,7 +5,7 @@ import {
   borders,
   sizes,
 } from '@src/styles/variables';
-import { FC, InputHTMLAttributes } from 'react';
+import { InputHTMLAttributes, VFC } from 'react';
 import styled, { css } from 'styled-components';
 
 interface InputProps {
@@ -13,7 +13,7 @@ interface InputProps {
   borderRadius?: BorderRadius;
 }
 
-const Input: FC<InputProps & InputHTMLAttributes<HTMLInputElement>> = ({
+const Input: VFC<InputProps & InputHTMLAttributes<HTMLInputElement>> = ({
   className,
   fontSize = 'default',
   borderRadius = 'small',
@@ -21,7 +21,6 @@ const Input: FC<InputProps & InputHTMLAttributes<HTMLInputElement>> = ({
   onBlur,
   onChange,
   placeholder,
-  children,
   value,
 }) => {
   return (
@@ -34,9 +33,7 @@ const Input: FC<InputProps & InputHTMLAttributes<HTMLInputElement>> = ({
       onBlur={onBlur}
       onChange={onChange}
       value={value}
-    >
-      {children}
-    </InputWrap>
+    />
   );
 };
 

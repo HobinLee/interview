@@ -1,32 +1,23 @@
 import { FC } from 'react';
-import { AiFillHome } from 'react-icons/ai';
-import { Link } from 'react-router-dom';
-import { useRecoilValue } from 'recoil';
-import { Answer, answerState } from '@src/stores/question';
 import { ReviewRoomWrapper } from './style';
-import { HomeButton } from '@src/components/molecules';
+import { Card, HomeButton } from '@src/components/molecules';
+import { ReviewList } from './ReviewList';
+import { Typography } from '@src/components/atoms';
 
 const ReviewRoom: FC = () => {
-  const answers: Answer[] = useRecoilValue<Answer[]>(answerState);
-
-  const answerList = answers.map((answer, idx) => (
-    <tr>
-      <td>{answer.question}</td>
-      <td>{answer.time}'</td>
-    </tr>
-  ));
-
   return (
     <ReviewRoomWrapper>
-      <h3>Review</h3>
-      <table className="review-table">
-        <tr>
-          <th>Questions</th>
-          <th>Time</th>
-        </tr>
-        {answerList}
-      </table>
-
+      <div className="review-room">
+        <Card
+          title={
+            <Typography heading="h3" fontSize="large">
+              질문 답변 모음
+            </Typography>
+          }
+        >
+          <ReviewList />
+        </Card>
+      </div>
       <HomeButton />
     </ReviewRoomWrapper>
   );

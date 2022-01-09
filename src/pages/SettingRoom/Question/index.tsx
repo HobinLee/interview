@@ -44,7 +44,7 @@ const QuestionElement: FC<QuestionProps> = ({
           onChange={handleModifiedQuestion}
           placeholder="질문을 입력해주세요"
           fontSize="small"
-        ></Input>
+        />
         <div className="buttons-wrapper">
           <Button onClick={handleConfirmModify} color="blue" fontSize="small">
             수정

@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { VFC } from 'react';
 import styled from 'styled-components';
 
 interface ImageProps {
@@ -7,7 +7,7 @@ interface ImageProps {
   alt?: string;
 }
 
-const Image: FC<ImageProps> = ({ src, onClick, alt }) => (
+const Image: VFC<ImageProps> = ({ src, onClick, alt }) => (
   <ImageWrapper src={src} onClick={onClick} alt={alt ?? ''}></ImageWrapper>
 );
 

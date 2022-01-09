@@ -19,11 +19,17 @@ interface TypographyProps {
   lineHeight?: '';
   wordBreak?: '';
   ellipsis?: boolean;
+  className?: string;
 }
 
-const Typography: FC<TypographyProps> = ({ heading, children, ...props }) => {
+const Typography: FC<TypographyProps> = ({
+  className,
+  heading,
+  children,
+  ...props
+}) => {
   return (
-    <InputWrap as={heading ?? 'div'} {...props}>
+    <InputWrap as={heading ?? 'div'} className={className} {...props}>
       {children}
     </InputWrap>
   );
@@ -31,7 +37,7 @@ const Typography: FC<TypographyProps> = ({ heading, children, ...props }) => {
 
 export default Typography;
 
-const InputWrap = styled.div<Omit<TypographyProps, 'heading'>>`
+const InputWrap = styled.div<Omit<TypographyProps, 'heading' | 'className'>>`
   ${({
     width,
     color = 'black',
