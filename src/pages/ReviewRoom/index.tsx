@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import { Answer, answerState } from '@src/stores/question';
 import { ReviewRoomWrapper } from './style';
+import { HomeButton } from '@src/components/molecules';
 
 const ReviewRoom: FC = () => {
   const answers: Answer[] = useRecoilValue<Answer[]>(answerState);
@@ -26,9 +27,7 @@ const ReviewRoom: FC = () => {
         {answerList}
       </table>
 
-      <Link to="/">
-        <AiFillHome fill="white" />
-      </Link>
+      <HomeButton />
     </ReviewRoomWrapper>
   );
 };

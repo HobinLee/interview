@@ -3,8 +3,7 @@ import QuestionList from './QuestionList';
 import { useRecoilValue } from 'recoil';
 import { questionSetKeyState } from '@src/stores/question';
 import { FC, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { AiFillHome } from 'react-icons/ai';
+import { HomeButton } from '@src/components/molecules';
 
 const SettingRoom: FC = () => {
   const questionSetKey = useRecoilValue(questionSetKeyState);
@@ -19,9 +18,7 @@ const SettingRoom: FC = () => {
         <QuestionList type="random" />
         <QuestionList type="end" />
       </div>
-      <Link to="/">
-        <AiFillHome fill="white" />
-      </Link>
+      <HomeButton />
     </SettingRoomWrapper>
   );
 };
