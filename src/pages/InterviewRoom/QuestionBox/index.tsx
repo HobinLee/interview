@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from 'react';
-import { Question, Seconds } from '../../../store/question';
+import { Question, Seconds } from '@src/stores/question';
 import { QuestionBoxWrapper } from './style';
 
 type QuestionBoxProps = {

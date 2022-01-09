@@ -1,7 +1,7 @@
 import { SettingRoomWrapper } from './style';
 import QuestionList from './QuestionList';
 import { useRecoilValue } from 'recoil';
-import { questionSetKeyState } from '../../store/question';
+import { questionSetKeyState } from '@src/stores/question';
 import { FC, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { AiFillHome } from 'react-icons/ai';

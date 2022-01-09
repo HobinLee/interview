@@ -1,7 +1,8 @@
 import { FC } from 'react';
+import { AiFillHome } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
-import { Answer, answerState } from '../../store/question';
+import { Answer, answerState } from '@src/stores/question';
 import { ReviewRoomWrapper } from './style';
 
 const ReviewRoom: FC = () => {
@@ -25,7 +26,9 @@ const ReviewRoom: FC = () => {
         {answerList}
       </table>
 
-      <Link to="/">again</Link>
+      <Link to="/">
+        <AiFillHome fill="white" />
+      </Link>
     </ReviewRoomWrapper>
   );
 };

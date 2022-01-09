@@ -21,17 +21,15 @@ interface TypographyProps {
   ellipsis?: boolean;
 }
 
-export const Typography: FC<TypographyProps> = ({
-  heading,
-  children,
-  ...props
-}) => {
+const Typography: FC<TypographyProps> = ({ heading, children, ...props }) => {
   return (
     <InputWrap as={heading ?? 'div'} {...props}>
       {children}
     </InputWrap>
   );
 };
+
+export default Typography;
 
 const InputWrap = styled.div<Omit<TypographyProps, 'heading'>>`
   ${({

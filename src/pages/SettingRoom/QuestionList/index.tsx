@@ -3,15 +3,13 @@ import {
   QuestionSet,
   QuestionSetKey,
   questionSetKeyState,
-} from '../../../store/question';
+} from '@src/stores/question';
 import { QuestionListWrapper } from './style';
 import { FC, useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
-import { useInput } from '../../../hooks';
+import { useInput } from '@src/hooks';
 import QuestionElement from '../Question';
-import { Input } from '@src/components/atoms/Input/Input';
-import { Button } from '@src/components/atoms/Button/Button';
-import { Typography } from '@src/components/atoms/Typography/Typography';
+import { Button, Input, Typography } from '@src/components/atoms';
 
 const questionTypeInfo = {
   begin: {

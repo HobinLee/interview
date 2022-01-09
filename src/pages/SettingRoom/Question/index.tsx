@@ -1,9 +1,7 @@
-import { Button } from '@src/components/atoms/Button/Button';
-import { Input } from '@src/components/atoms/Input/Input';
-import { Typography } from '@src/components/atoms/Typography/Typography';
+import { Button, Input, Typography } from '@src/components/atoms';
 import { FC, useState } from 'react';
-import { useInput } from '../../../hooks';
-import { Question } from '../../../store/question';
+import { useInput } from '@src/hooks';
+import { Question } from '@src/stores/question';
 import { QuestionElementWrapper } from './style';
 
 type QuestionProps = {

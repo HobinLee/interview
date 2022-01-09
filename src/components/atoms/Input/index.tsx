@@ -13,7 +13,7 @@ interface InputProps {
   borderRadius?: BorderRadius;
 }
 
-export const Input: FC<InputProps & InputHTMLAttributes<HTMLInputElement>> = ({
+const Input: FC<InputProps & InputHTMLAttributes<HTMLInputElement>> = ({
   className,
   fontSize = 'default',
   borderRadius = 'small',
@@ -39,6 +39,8 @@ export const Input: FC<InputProps & InputHTMLAttributes<HTMLInputElement>> = ({
     </InputWrap>
   );
 };
+
+export default Input;
 
 const InputWrap = styled.input<Required<InputProps>>`
   cursor: text !important;

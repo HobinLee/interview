@@ -17,9 +17,7 @@ interface ButtonProps {
   borderRadius?: BorderRadius;
 }
 
-export const Button: FC<
-  ButtonProps & ButtonHTMLAttributes<HTMLButtonElement>
-> = ({
+const Button: FC<ButtonProps & ButtonHTMLAttributes<HTMLButtonElement>> = ({
   className,
   fontSize = 'default',
   color = 'gray',
@@ -43,6 +41,8 @@ export const Button: FC<
     {children}
   </ButtonWrap>
 );
+
+export default Button;
 
 const outlineStyle = (color: Color) => css`
   border: 1px solid ${colors[color]};

@@ -14,11 +14,11 @@ import {
   QuestionSet,
   questionSetKeyState,
   QuestionSetKey,
-} from '../../store/question';
+} from '@src/stores/question';
 import QuestionBox from './QuestionBox';
-import EnterSFX from '../../assets/audios/enter.mp3';
+import EnterSFX from '@src/assets/audios/enter.mp3';
 import StartButton from './StartButton';
-import { draw, shuffle } from '../../utils/utils';
+import { draw, shuffle } from '@src/utils/utils';
 
 const MILLSEC_PER_SEC: number = 1000;
 

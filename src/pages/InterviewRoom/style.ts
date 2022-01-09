@@ -21,7 +21,6 @@ export const InterviewRoomWrapper = styled.main`
     justify-content: center;
     align-items: flex-start;
     height: calc(25vw + 13em);
-    max-height: ;
 
     > div {
       width: 40vw;
