@@ -1,3 +1,4 @@
+import { flexCenter } from '@src/styles/mixins';
 import {
   FontSize,
   Color,
@@ -16,6 +17,7 @@ interface ButtonProps {
   block?: boolean; // width: 100%
   borderRadius?: BorderRadius;
   padding?: string;
+  margin?: string;
 }
 
 const Button: FC<ButtonProps & ButtonHTMLAttributes<HTMLButtonElement>> = ({
@@ -29,6 +31,7 @@ const Button: FC<ButtonProps & ButtonHTMLAttributes<HTMLButtonElement>> = ({
   onClick,
   disabled,
   padding,
+  margin,
 }) => (
   <ButtonWrap
     onClick={onClick}
@@ -40,6 +43,7 @@ const Button: FC<ButtonProps & ButtonHTMLAttributes<HTMLButtonElement>> = ({
     borderRadius={borderRadius}
     disabled={disabled}
     padding={padding ?? '0.5rem 1rem'}
+    margin={margin ?? ''}
   >
     {children}
   </ButtonWrap>
@@ -61,15 +65,29 @@ const strokeStyle = (color: Color) => css`
 `;
 
 const ButtonWrap = styled.button<Required<ButtonProps>>`
-  ${({ fontSize, color, isFilled, block, borderRadius, padding }) => css`
+  ${({
+    fontSize,
+    color,
+    isFilled,
+    block,
+    borderRadius,
+    padding,
+    margin,
+  }) => css`
     transition: 0.5s;
 
-    box-sizing: border-box;
-    font-size: ${sizes.font[fontSize]};
-    outline: none;
     padding: ${padding};
-    cursor: pointer;
+    margin: ${margin};
+
+    box-sizing: border-box;
+
     border-radius: ${borders[borderRadius]};
+    outline: none;
+    font-size: ${sizes.font[fontSize]};
+
+    ${flexCenter}
+
+    cursor: pointer;
     ${isFilled ? strokeStyle(color) : outlineStyle(color)}
     ${block &&
     css`

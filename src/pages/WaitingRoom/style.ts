@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { media } from './mixins';
+import { media } from '@src/styles/mixins';
 
 export const WaitingRoomWrapper = styled.main`
   display: flex;

@@ -78,7 +78,7 @@ const QuestionList: FC<QuestionListProps> = ({ type }) => {
   return (
     <QuestionListWrapper>
       <div className="title">
-        <Typography heading="h4">{questionTypeInfo[type].title}</Typography>
+        <Typography tag="h4">{questionTypeInfo[type].title}</Typography>
         <Typography color="gray" fontSize="small">
           * {questionTypeInfo[type].indication}
         </Typography>

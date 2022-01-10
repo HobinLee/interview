@@ -22,7 +22,7 @@ const WaitingRoom: FC = () => {
         <div className="waiting-room__content">
           <div className="waiting-room__camera"></div>
           <div className="waiting-room__start">
-            <Typography heading="h3" fontSize="large">
+            <Typography tag="h3" fontSize="large">
               참여할 준비가 되셨나요?
             </Typography>
             <Button

@@ -10,7 +10,7 @@ const ReviewRoom: FC = () => {
       <div className="review-room">
         <Card
           title={
-            <Typography heading="h3" fontSize="large">
+            <Typography tag="h3" fontSize="large">
               질문 답변 모음
             </Typography>
           }

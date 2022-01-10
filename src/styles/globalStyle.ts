@@ -33,6 +33,16 @@ const GlobalStyle = createGlobalStyle`
   a {
     text-decoration: none;
   }
+  body {
+    max-width: 100vw;
+    max-height: 100vh;
+    overflow: hidden;
+  }
+
+  main {
+    max-height: 100vh;
+    overflow: scroll;
+  }
 `;
 
 export default GlobalStyle;

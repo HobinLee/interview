@@ -1,3 +1,5 @@
+import { css } from 'styled-components';
+
 export const screen = {
   mobile: 480,
   tablet: 720,
@@ -12,3 +14,10 @@ export const media = (max: number | keyof typeof screen) =>
 export const onlyMobile = `@media only screen and (min-width: ${screen.mobile}px) {
   display: none;
 }`;
+
+export const flexCenter = css`
+  display: flex;
+  flex-direction: center;
+  justify-content: center;
+  align-items: center;
+`;

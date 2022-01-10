@@ -11,7 +11,7 @@ import styled, { css } from 'styled-components';
 
 interface TypographyProps {
   width?: string | 'auto';
-  heading?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5';
+  tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'div' | 'span';
   fontSize?: FontSize;
   fontWeight?: FontWeight;
   color?: Color;
@@ -20,16 +20,18 @@ interface TypographyProps {
   wordBreak?: '';
   ellipsis?: boolean;
   className?: string;
+  margin?: string;
+  padding?: string;
 }
 
 const Typography: FC<TypographyProps> = ({
   className,
-  heading,
+  tag,
   children,
   ...props
 }) => {
   return (
-    <InputWrap as={heading ?? 'div'} className={className} {...props}>
+    <InputWrap as={tag ?? 'div'} className={className} {...props}>
       {children}
     </InputWrap>
   );
@@ -37,7 +39,7 @@ const Typography: FC<TypographyProps> = ({
 
 export default Typography;
 
-const InputWrap = styled.div<Omit<TypographyProps, 'heading' | 'className'>>`
+const InputWrap = styled.span<Omit<TypographyProps, 'heading' | 'className'>>`
   ${({
     width,
     color = 'black',
@@ -47,6 +49,8 @@ const InputWrap = styled.div<Omit<TypographyProps, 'heading' | 'className'>>`
     fontWeight = 'default',
     textAlign = 'left',
     ellipsis = false,
+    margin = '0',
+    padding = '0',
   }) => css`
     width: ${width ? `${width}px` : 'auto'};
     color: ${colors[color]};
@@ -55,6 +59,8 @@ const InputWrap = styled.div<Omit<TypographyProps, 'heading' | 'className'>>`
     font-weight: ${fontWeight};
     word-break: ${wordBreak};
     text-align: ${textAlign};
+    margin: ${margin};
+    padding: ${padding};
     ${ellipsis &&
     css`
       overflow: hidden;

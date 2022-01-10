@@ -1,9 +1,11 @@
 export const sizes = {
   font: {
+    smaller: '0.6rem',
     small: '0.8rem',
     normal: '1rem',
     default: '1rem',
     large: '1.2rem',
+    larger: '2rem',
   },
 };
 

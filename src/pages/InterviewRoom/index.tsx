@@ -1,9 +1,8 @@
-import { FC, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { InterviewRoomWrapper } from './style';
+import { ComponentPropsWithoutRef, FC, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { InterviewRoomWrapper, IndicationBox } from './style';
 import { MdCallEnd } from 'react-icons/md';
-import { GrNext } from 'react-icons/gr';
-import { AiOutlineFileSearch } from 'react-icons/ai';
+import { AiOutlineFileSearch, AiOutlineRight } from 'react-icons/ai';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import {
   Answer,
@@ -17,8 +16,10 @@ import {
 } from '@src/stores/question';
 import QuestionBox from './QuestionBox';
 import EnterSFX from '@src/assets/audios/enter.mp3';
-import StartButton from './StartButton';
 import { draw, shuffle } from '@src/utils/utils';
+import { Button, Typography } from '@src/components/atoms';
+import { ROUTE_HOME, ROUTE_REVIEW } from '@src/routes';
+import Profile from './Profile';
 
 const MILLSEC_PER_SEC: number = 1000;
 
@@ -36,7 +37,27 @@ const getQuestions = ({ essential, random }: MiddleQuestions): Question[] => {
   return shuffle(questions);
 };
 
+const FooterButton: FC<
+  Pick<
+    ComponentPropsWithoutRef<typeof Button>,
+    'color' | 'disabled' | 'onClick'
+  >
+> = ({ children, ...props }) => (
+  <Button
+    {...props}
+    isFilled
+    padding="0.5rem 1.4rem"
+    fontSize="large"
+    borderRadius="larger"
+    margin="0 0.5rem"
+  >
+    {children}
+  </Button>
+);
+
 const InterviewRoom: FC = () => {
+  const navigate = useNavigate();
+
   const questionSetKey = useRecoilValue<QuestionSetKey>(questionSetKeyState);
   const [questions, setQuestions] = useRecoilState<Question[]>(questionState);
   const [answerList, setAnswerList] = useRecoilState<Answer[]>(answerState);
@@ -91,48 +112,84 @@ const InterviewRoom: FC = () => {
     setStandby(true);
   };
 
+  const moveToHome = () => {
+    navigate(ROUTE_HOME);
+  };
+  const moveToReview = () => {
+    navigate(ROUTE_REVIEW);
+  };
+
+  const showNextButton = index === 0 || !!questions[index];
+
   return (
     <InterviewRoomWrapper>
       <audio src={EnterSFX} autoPlay />
-      <div className="interviewers">
-        <div className="interviewer">
-          <div className="profile"></div>
-        </div>
-        <div className="interviewer">
-          <div className="profile"></div>
-        </div>
-      </div>
-      {start ? (
-        questions[index] ? (
-          <QuestionBox question={questions[index]} setStandby={setStandby} />
-        ) : (
-          <h3>고생하셨습니다</h3>
-        )
-      ) : (
-        <StartButton setStart={startQuestion} />
-      )}
-      <div className="interviewee">
-        <div className="profile"></div>
+      <div className="body">
+        <Profile type="interviewer" />
+        <Profile type="interviewer" />
+        <Profile type="interviewee" />
+
+        <IndicationBox>
+          {start ? (
+            questions[index] ? (
+              <QuestionBox
+                question={questions[index]}
+                setStandby={setStandby}
+              />
+            ) : (
+              <Typography
+                fontSize="large"
+                color="white"
+                fontWeight="bold"
+                textAlign="center"
+                margin="2rem 0"
+              >
+                고생하셨습니다 🙂
+              </Typography>
+            )
+          ) : (
+            <Button
+              onClick={startQuestion}
+              color="green"
+              isFilled
+              borderRadius="large"
+              margin="2rem auto"
+            >
+              시작하기
+            </Button>
+          )}
+        </IndicationBox>
       </div>
       <div className="footer">
-        {questions[index] ? (
-          <button
-            className="next-button"
-            disabled={standby}
-            onClick={handelNextQuestion}
+        <span className="start-time">
+          <Typography
+            color="white"
+            margin="0 0 0.5rem 0"
+            fontWeight="bold"
+            fontSize="smaller"
           >
-            <GrNext />
-          </button>
-        ) : (
-          <Link className="review-button" to="/review">
+            시작시간
+          </Typography>
+          <Typography color="white" fontSize="large">
+            {startTime}
+          </Typography>
+        </span>
+
+        <FooterButton
+          color="blue"
+          disabled={showNextButton && standby}
+          onClick={showNextButton ? handelNextQuestion : moveToReview}
+        >
+          {showNextButton ? (
+            <AiOutlineRight stroke="#fff" />
+          ) : (
             <AiOutlineFileSearch />
-          </Link>
-        )}
-        <Link className="close-button" to="/">
+          )}
+        </FooterButton>
+        <FooterButton color="red" onClick={moveToHome}>
           <MdCallEnd />
-        </Link>
+        </FooterButton>
       </div>
-      <span className="start-time">start from {startTime}</span>
     </InterviewRoomWrapper>
   );
 };
