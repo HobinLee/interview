@@ -1,4 +1,5 @@
 import { Button, Typography } from '@src/components/atoms';
+import { ROUTE_INTERVIEW, ROUTE_SETTING } from '@src/routes';
 import { FC } from 'react';
 
 import { useNavigate } from 'react-router-dom';
@@ -9,10 +10,10 @@ const WaitingRoom: FC = () => {
   const navigate = useNavigate();
 
   const moveToInterviewRoom = () => {
-    navigate('/home');
+    navigate(ROUTE_INTERVIEW);
   };
   const moveToSettingRoom = () => {
-    navigate('/setting');
+    navigate(ROUTE_SETTING);
   };
 
   return (

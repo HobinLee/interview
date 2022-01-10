@@ -1,3 +1,4 @@
+import { ROUTE_HOME } from '@src/routes';
 import { colors } from '@src/styles/variables';
 import { FC } from 'react';
 import { AiFillHome } from 'react-icons/ai';
@@ -5,7 +6,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const HomeButton: FC = () => (
-  <LinkWrapper to="/">
+  <LinkWrapper to={ROUTE_HOME}>
     <AiFillHome fill="white" />
   </LinkWrapper>
 );
