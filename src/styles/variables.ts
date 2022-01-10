@@ -20,9 +20,11 @@ export const colors = {
 
 export const borders = {
   round: '50%',
-  small: '2px',
-  normal: '4px',
-  large: '8px',
+  smaller: '0.2rem',
+  small: '0.4rem',
+  normal: '0.8rem',
+  large: '1.2rem',
+  larger: '1.6rem',
   none: '0',
 };
 
