@@ -15,6 +15,7 @@ interface ButtonProps {
   isFilled?: boolean;
   block?: boolean; // width: 100%
   borderRadius?: BorderRadius;
+  padding?: string;
 }
 
 const Button: FC<ButtonProps & ButtonHTMLAttributes<HTMLButtonElement>> = ({
@@ -27,6 +28,7 @@ const Button: FC<ButtonProps & ButtonHTMLAttributes<HTMLButtonElement>> = ({
   children,
   onClick,
   disabled,
+  padding,
 }) => (
   <ButtonWrap
     onClick={onClick}
@@ -37,6 +39,7 @@ const Button: FC<ButtonProps & ButtonHTMLAttributes<HTMLButtonElement>> = ({
     block={block}
     borderRadius={borderRadius}
     disabled={disabled}
+    padding={padding ?? '0.5rem 1rem'}
   >
     {children}
   </ButtonWrap>
@@ -58,13 +61,13 @@ const strokeStyle = (color: Color) => css`
 `;
 
 const ButtonWrap = styled.button<Required<ButtonProps>>`
-  ${({ fontSize, color, isFilled, block, borderRadius }) => css`
+  ${({ fontSize, color, isFilled, block, borderRadius, padding }) => css`
     transition: 0.5s;
 
     box-sizing: border-box;
     font-size: ${sizes.font[fontSize]};
     outline: none;
-    padding: 0.5rem 1rem;
+    padding: ${padding};
     cursor: pointer;
     border-radius: ${borders[borderRadius]};
     ${isFilled ? strokeStyle(color) : outlineStyle(color)}

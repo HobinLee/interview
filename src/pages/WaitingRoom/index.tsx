@@ -1,23 +1,48 @@
+import { Button, Typography } from '@src/components/atoms';
 import { FC } from 'react';
-import { Link } from 'react-router-dom';
+
+import { useNavigate } from 'react-router-dom';
+
 import { WaitingRoomWrapper } from './style';
 
-const WaitingRoom: FC = () => (
-  <WaitingRoomWrapper>
-    <div className="question-set">
-      <Link to="/setting">질문 목록 수정</Link>
-    </div>
+const WaitingRoom: FC = () => {
+  const navigate = useNavigate();
 
-    <div className="waiting-room">
-      <div className="waiting-room__content">
-        <div className="waiting-room__camera"></div>
-        <div className="waiting-room__start">
-          <h3>참여할 준비가 되셨나요?</h3>
-          <Link to="/interview">지금 참여하기</Link>
+  const moveToInterviewRoom = () => {
+    navigate('/home');
+  };
+  const moveToSettingRoom = () => {
+    navigate('/setting');
+  };
+
+  return (
+    <WaitingRoomWrapper>
+      <div className="waiting-room">
+        <div className="waiting-room__content">
+          <div className="waiting-room__camera"></div>
+          <div className="waiting-room__start">
+            <Typography heading="h3" fontSize="large">
+              참여할 준비가 되셨나요?
+            </Typography>
+            <Button
+              color="blue"
+              borderRadius="larger"
+              onClick={moveToInterviewRoom}
+              isFilled
+              padding="1rem 3rem"
+            >
+              지금 참여하기
+            </Button>
+          </div>
         </div>
       </div>
-    </div>
-  </WaitingRoomWrapper>
-);
+      <div className="question-set">
+        <Button color="green" onClick={moveToSettingRoom}>
+          질문 목록 수정
+        </Button>
+      </div>
+    </WaitingRoomWrapper>
+  );
+};
 
 export default WaitingRoom;

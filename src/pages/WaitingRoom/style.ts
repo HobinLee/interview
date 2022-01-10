@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { media } from './mixins';
 
 export const WaitingRoomWrapper = styled.main`
   display: flex;
@@ -11,11 +12,12 @@ export const WaitingRoomWrapper = styled.main`
   width: 100%;
 
   .question-set {
+    width: 100%;
+    position: fixed;
+    bottom: 3rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 10rem;
-    font-size: 2rem;
   }
 
   .waiting-room {
@@ -25,20 +27,33 @@ export const WaitingRoomWrapper = styled.main`
 
     &__content {
       display: flex;
+      flex-direction: row;
+
+      ${media('tablet')} {
+        flex-direction: column;
+      }
       > div {
         border-radius: 1rem;
       }
     }
 
     &__camera {
-      min-width: 400px;
       width: 50vw;
       height: 28vw;
       background: #333;
+      width: 50vw;
+      height: 28vw;
+      min-width: 400px;
+
+      ${media('tablet')} {
+        width: 80vw;
+        height: 42vw;
+      }
     }
 
     &__start {
-      width: 44.8rem;
+      margin-top: 0;
+      margin-left: 5rem;
       min-height: 100%;
       display: flex;
       flex-direction: column;
@@ -46,18 +61,13 @@ export const WaitingRoomWrapper = styled.main`
       justify-content: center;
       align-items: center;
 
-      > h3 {
-        font-size: 2.8rem;
+      ${media('tablet')} {
+        margin-left: 0;
+        margin-top: 5rem;
       }
 
-      > a {
-        font-size: 1.6rem;
-        display: block;
-        padding: 1.7rem 3rem;
-        background: #1a73e8;
-        color: #fff;
-        border-radius: 2.5rem;
-        text-decoration: none;
+      button {
+        margin-top: 2rem;
       }
     }
   }
