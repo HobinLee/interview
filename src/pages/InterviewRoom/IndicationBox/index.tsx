@@ -2,7 +2,7 @@ import { Button, Typography } from '@src/components/atoms';
 import { Question } from '@src/stores/question';
 import { FC } from 'react';
 import QuestionBox from './QuestionBox';
-import { IndicationBox } from './style';
+import * as S from './style';
 
 interface IndicationBoxProps {
   start: boolean;
@@ -11,7 +11,7 @@ interface IndicationBoxProps {
   setStandby: (standby: boolean) => void;
 }
 
-export const IndicatorBox: FC<IndicationBoxProps> = ({
+export const IndicationBox: FC<IndicationBoxProps> = ({
   start,
   question,
   startQuestion,
@@ -22,7 +22,7 @@ export const IndicatorBox: FC<IndicationBoxProps> = ({
   // 준비 중
   if (!start) {
     return (
-      <IndicationBox>
+      <S.IndicationBoxWrap>
         <Button
           onClick={startQuestion}
           color="green"
@@ -32,13 +32,13 @@ export const IndicatorBox: FC<IndicationBoxProps> = ({
         >
           시작하기
         </Button>
-      </IndicationBox>
+      </S.IndicationBoxWrap>
     );
   }
 
   // 인터뷰 중
   return (
-    <IndicationBox>
+    <S.IndicationBoxWrap>
       {isQuestionEnd ? (
         <QuestionBox question={question} setStandby={setStandby} />
       ) : (
@@ -52,6 +52,6 @@ export const IndicatorBox: FC<IndicationBoxProps> = ({
           고생하셨습니다 🙂
         </Typography>
       )}
-    </IndicationBox>
+    </S.IndicationBoxWrap>
   );
 };

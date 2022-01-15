@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from 'react';
-import { InterviewRoomWrapper } from './style';
+import * as S from './style';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import {
   Answer,
@@ -14,10 +14,10 @@ import {
 import EnterSFX from '@src/assets/audios/enter.mp3';
 import { draw, shuffle } from '@src/utils/utils';
 import { useAudio } from '@src/hooks';
-import { LoadingPage } from './Loading';
-import { Body } from './Body';
-import { Footer } from './Footer';
-import { IndicatorBox } from './IndicatorBox';
+import { LoadingIndicator } from './Loading';
+import { InterviewRoomBody } from './Body';
+import { InterviewRoomFooter } from './Footer';
+import { IndicationBox } from './IndicationBox';
 
 const MILLSEC_PER_SEC: number = 1000;
 
@@ -91,18 +91,18 @@ const InterviewRoom: FC = () => {
   };
 
   return (
-    <InterviewRoomWrapper>
+    <S.InterviewRoom>
       {isLoading ? (
-        <LoadingPage />
+        <LoadingIndicator />
       ) : (
         <>
-          <Body />
-          <Footer
+          <InterviewRoomBody />
+          <InterviewRoomFooter
             showNextButton={index === 0 || !!questions[index]}
             handelNextQuestion={handelNextQuestion}
             standby={standby}
           />
-          <IndicatorBox
+          <IndicationBox
             start={start}
             question={questions[index]}
             setStandby={setStandby}
@@ -111,7 +111,7 @@ const InterviewRoom: FC = () => {
         </>
       )}
       {audio}
-    </InterviewRoomWrapper>
+    </S.InterviewRoom>
   );
 };
 

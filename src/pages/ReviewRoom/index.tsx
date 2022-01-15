@@ -1,13 +1,13 @@
 import { FC } from 'react';
-import { ReviewRoomWrapper } from './style';
+import * as S from './style';
 import { Card, HomeButton } from '@src/components/molecules';
 import { ReviewList } from './ReviewList';
 import { Typography } from '@src/components/atoms';
 
 const ReviewRoom: FC = () => {
   return (
-    <ReviewRoomWrapper>
-      <div className="review-room">
+    <S.ReviewRoom>
+      <S.ReviewRoomBody>
         <Card
           title={
             <Typography tag="h3" fontSize="large">
@@ -17,9 +17,9 @@ const ReviewRoom: FC = () => {
         >
           <ReviewList />
         </Card>
-      </div>
+      </S.ReviewRoomBody>
       <HomeButton />
-    </ReviewRoomWrapper>
+    </S.ReviewRoom>
   );
 };
 

@@ -1,12 +1,12 @@
 import { FC } from 'react';
-import { ProfileWrapper } from './style';
+import * as S from './style';
 
 type ProfileProps = {
   type: 'interviewer' | 'interviewee';
 };
 
 const Profile: FC<ProfileProps> = ({ type }) => {
-  return <ProfileWrapper></ProfileWrapper>;
+  return <S.ProfileWrap></S.ProfileWrap>;
 };
 
 export default Profile;

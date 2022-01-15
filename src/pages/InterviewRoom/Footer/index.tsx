@@ -5,6 +5,7 @@ import { ROUTE_HOME, ROUTE_REVIEW } from '@src/routes';
 import { FooterButton } from './FooterButton';
 import { AiOutlineFileSearch, AiOutlineRight } from 'react-icons/ai';
 import { MdCallEnd } from 'react-icons/md';
+import * as S from './styles';
 
 interface FooterProps {
   standby: boolean;
@@ -12,7 +13,7 @@ interface FooterProps {
   showNextButton: boolean;
 }
 
-export const Footer: VFC<FooterProps> = ({
+export const InterviewRoomFooter: VFC<FooterProps> = ({
   standby,
   handelNextQuestion,
   showNextButton,
@@ -28,8 +29,8 @@ export const Footer: VFC<FooterProps> = ({
   };
 
   return (
-    <div className="footer">
-      <span className="start-time">
+    <S.InterviewRoomFooter>
+      <S.StartTimeWrap>
         <Typography
           color="white"
           margin="0 0 0.5rem 0"
@@ -41,7 +42,7 @@ export const Footer: VFC<FooterProps> = ({
         <Typography color="white" fontSize="large">
           {startTime}
         </Typography>
-      </span>
+      </S.StartTimeWrap>
 
       <FooterButton
         color="blue"
@@ -57,6 +58,6 @@ export const Footer: VFC<FooterProps> = ({
       <FooterButton color="red" onClick={moveToHome}>
         <MdCallEnd />
       </FooterButton>
-    </div>
+    </S.InterviewRoomFooter>
   );
 };

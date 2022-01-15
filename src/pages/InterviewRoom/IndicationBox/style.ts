@@ -1,7 +1,7 @@
 import { Z_INDEX } from '@src/styles/zIndex';
 import styled from 'styled-components';
 
-export const IndicationBox = styled.div`
+export const IndicationBoxWrap = styled.div`
   width: 100vw;
   height: auto;
 

@@ -1,29 +1,28 @@
 import { Typography } from '@src/components/atoms';
 import { Answer, answerState } from '@src/stores/question';
-import { colors } from '@src/styles/variables';
 import { VFC } from 'react';
 import { useRecoilValue } from 'recoil';
-import styled from 'styled-components';
+import * as S from './styles';
 
 export const ReviewList: VFC = () => {
   const answers: Answer[] = useRecoilValue<Answer[]>(answerState);
 
   const answerList = answers.map((answer, idx) => (
-    <li key={idx}>
-      <span className="question">
+    <S.ReviewListElement key={idx}>
+      <S.QuestionWrap>
         <Typography fontSize="normal" fontWeight="bold" ellipsis>
           {answer.question}
         </Typography>
-      </span>
-      <span className="time">
+      </S.QuestionWrap>
+      <S.TimeWrap>
         <Typography>{answer.time}'</Typography>
-      </span>
-    </li>
+      </S.TimeWrap>
+    </S.ReviewListElement>
   ));
 
   return (
-    <ListWrapper>
-      <li>
+    <S.ReviewList>
+      <S.ReviewListElement>
         <Typography
           className="question"
           fontSize="normal"
@@ -42,30 +41,8 @@ export const ReviewList: VFC = () => {
         >
           시간
         </Typography>
-      </li>
+      </S.ReviewListElement>
       {answerList}
-    </ListWrapper>
+    </S.ReviewList>
   );
 };
-
-export const ListWrapper = styled.ul`
-  width: 100%;
-  min-height: 300px;
-
-  li {
-    display: flex;
-    flex-direction: row;
-    margin-top: 1rem;
-  }
-
-  .question {
-    width: 300px;
-    border-right: 1px solid ${colors.gray};
-    margin-right: 1rem;
-    padding-right: 1rem;
-  }
-
-  .time {
-    width: 100px;
-  }
-`;

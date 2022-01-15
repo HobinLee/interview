@@ -1,7 +1,7 @@
 import { media } from '@src/styles/mixins';
 import styled from 'styled-components';
 
-export const ProfileWrapper = styled.div`
+export const ProfileWrap = styled.div`
   width: 40vw;
   height: 25vw;
   max-width: 480px;

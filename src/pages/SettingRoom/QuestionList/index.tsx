@@ -4,7 +4,7 @@ import {
   QuestionSetKey,
   questionSetKeyState,
 } from '@src/stores/question';
-import { QuestionListWrapper } from './style';
+import * as S from './style';
 import { FC, useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { useInput } from '@src/hooks';
@@ -76,35 +76,33 @@ const QuestionList: FC<QuestionListProps> = ({ type }) => {
   ));
 
   return (
-    <QuestionListWrapper>
-      <div className="title">
+    <S.QuestionListSection>
+      <S.QuestionListTitleWrap>
         <Typography tag="h4">{questionTypeInfo[type].title}</Typography>
         <Typography color="gray" fontSize="small">
           * {questionTypeInfo[type].indication}
         </Typography>
-      </div>
-      <ul className="list">
-        <li>
-          <div className="add-question-button">
-            <Input
-              onChange={onChange}
-              value={newQuestion}
-              placeholder="질문을 입력해주세요"
-              fontSize="small"
-            />
-            <Button
-              onClick={handleAddQuestion}
-              color="green"
-              fontSize="small"
-              disabled={!newQuestion.length}
-            >
-              추가
-            </Button>
-          </div>
-        </li>
+      </S.QuestionListTitleWrap>
+      <S.QuestionList>
+        <S.AddQuestionWrap>
+          <Input
+            onChange={onChange}
+            value={newQuestion}
+            placeholder="질문을 입력해주세요"
+            fontSize="small"
+          />
+          <Button
+            onClick={handleAddQuestion}
+            color="green"
+            fontSize="small"
+            disabled={!newQuestion.length}
+          >
+            추가
+          </Button>
+        </S.AddQuestionWrap>
         {questionList}
-      </ul>
-    </QuestionListWrapper>
+      </S.QuestionList>
+    </S.QuestionListSection>
   );
 };
 

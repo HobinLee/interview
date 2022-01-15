@@ -1,7 +1,7 @@
 import { colors } from '@src/styles/variables';
 import styled from 'styled-components';
 
-export const SettingRoomWrapper = styled.main`
+export const SettingRoom = styled.main`
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -9,16 +9,17 @@ export const SettingRoomWrapper = styled.main`
   justify-content: center;
   min-height: 100vh;
   background-color: ${colors.lightGray};
-  .setting-room {
-    width: 100%;
-    max-width: 800px;
-    display: flex;
-    flex-direction: column;
+`;
 
-    button {
-      width: 60px;
-      min-width: 60px;
-      margin-left: 5px;
-    }
+export const SettingRoomBody = styled.section`
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+
+  button {
+    width: 60px;
+    min-width: 60px;
+    margin-left: 5px;
   }
 `;

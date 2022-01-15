@@ -1,4 +1,4 @@
-import { SettingRoomWrapper } from './style';
+import * as S from './style';
 import QuestionList from './QuestionList';
 import { useRecoilValue } from 'recoil';
 import { questionSetKeyState } from '@src/stores/question';
@@ -11,15 +11,15 @@ const SettingRoom: FC = () => {
     console.log(questionSetKey);
   }, [, questionSetKeyState]);
   return (
-    <SettingRoomWrapper>
-      <div className="setting-room">
+    <S.SettingRoom>
+      <S.SettingRoomBody>
         <QuestionList type="begin" />
         <QuestionList type="essential" />
         <QuestionList type="random" />
         <QuestionList type="end" />
-      </div>
+      </S.SettingRoomBody>
       <HomeButton />
-    </SettingRoomWrapper>
+    </S.SettingRoom>
   );
 };
 

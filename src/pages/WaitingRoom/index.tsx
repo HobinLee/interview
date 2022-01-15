@@ -4,7 +4,7 @@ import { FC } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
-import { WaitingRoomWrapper } from './style';
+import * as S from './style';
 
 const WaitingRoom: FC = () => {
   const navigate = useNavigate();
@@ -17,11 +17,11 @@ const WaitingRoom: FC = () => {
   };
 
   return (
-    <WaitingRoomWrapper>
-      <div className="waiting-room">
-        <div className="waiting-room__content">
-          <div className="waiting-room__camera"></div>
-          <div className="waiting-room__start">
+    <S.WaitingRoom>
+      <S.WaitingRoomBody>
+        <S.WaintingRoomContent>
+          <S.CameraWrap />
+          <S.StartWrap>
             <Typography tag="h3" fontSize="large">
               참여할 준비가 되셨나요?
             </Typography>
@@ -34,15 +34,15 @@ const WaitingRoom: FC = () => {
             >
               지금 참여하기
             </Button>
-          </div>
-        </div>
-      </div>
-      <div className="question-set">
+          </S.StartWrap>
+        </S.WaintingRoomContent>
+      </S.WaitingRoomBody>
+      <S.QuestionSetWrap>
         <Button color="green" onClick={moveToSettingRoom}>
           질문 목록 수정
         </Button>
-      </div>
-    </WaitingRoomWrapper>
+      </S.QuestionSetWrap>
+    </S.WaitingRoom>
   );
 };
 

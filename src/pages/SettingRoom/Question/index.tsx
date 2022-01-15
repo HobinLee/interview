@@ -2,7 +2,7 @@ import { Button, Input, Typography } from '@src/components/atoms';
 import { FC, useState } from 'react';
 import { useInput } from '@src/hooks';
 import { Question } from '@src/stores/question';
-import { QuestionElementWrapper } from './style';
+import * as S from './style';
 
 type QuestionProps = {
   question: Question;
@@ -38,7 +38,7 @@ const QuestionElement: FC<QuestionProps> = ({
 
   if (isModify) {
     return (
-      <QuestionElementWrapper>
+      <S.QuestionElement>
         <Input
           value={modifiedQuestion}
           onChange={handleModifiedQuestion}
@@ -53,12 +53,12 @@ const QuestionElement: FC<QuestionProps> = ({
             취소
           </Button>
         </div>
-      </QuestionElementWrapper>
+      </S.QuestionElement>
     );
   }
 
   return (
-    <QuestionElementWrapper>
+    <S.QuestionElement>
       <Typography ellipsis fontWeight="default">
         {question}
       </Typography>
@@ -70,7 +70,7 @@ const QuestionElement: FC<QuestionProps> = ({
           삭제
         </Button>
       </div>
-    </QuestionElementWrapper>
+    </S.QuestionElement>
   );
 };
 
