@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 import { Z_INDEX } from '@src/styles/zIndex';
+import { colors } from '@src/styles/variables';
 
 export const InterviewRoomWrapper = styled.main`
-  background: #333;
+  background: ${colors.darkGray};
   width: 100vw;
   height: 100vh;
 
