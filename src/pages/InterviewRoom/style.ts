@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Z_INDEX } from '@src/styles/zIndex';
 import { colors } from '@src/styles/variables';
 
 export const InterviewRoomWrapper = styled.main`
@@ -37,16 +36,4 @@ export const InterviewRoomWrapper = styled.main`
     position: absolute;
     left: 2rem;
   }
-`;
-
-export const IndicationBox = styled.div`
-  width: 100vw;
-  height: auto;
-
-  position: fixed;
-  top: calc(50%-2rem);
-  left: 0;
-  z-index: ${Z_INDEX.QUETION};
-
-  background: rgba(0, 0, 0, 0.4);
 `;

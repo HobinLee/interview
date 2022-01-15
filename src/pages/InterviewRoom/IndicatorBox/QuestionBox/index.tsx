@@ -1,7 +1,6 @@
 import { FC, useEffect, useState } from 'react';
 import { Question, Seconds } from '@src/stores/question';
 import { Typography } from '@src/components/atoms';
-import { IndicationBox } from '../style';
 
 const STAND_BY_SECONDS = 3;
 const ONE_SECOND = 1000;
