@@ -10,9 +10,9 @@ export const sizes = {
 };
 
 export const colors = {
-  black: '#333',
+  black: '#111',
   white: '#fff',
-  darkGray: '#666',
+  darkGray: '#333',
   gray: '#ccc',
   lightGray: '#eee',
   red: '#c14e4e',
