@@ -1,4 +1,5 @@
 import { Button, Typography } from '@src/components/atoms';
+import Camera from '@src/components/atoms/Camera';
 import { ROUTE_INTERVIEW, ROUTE_SETTING } from '@src/routes';
 import { FC } from 'react';
 
@@ -20,7 +21,9 @@ const WaitingRoom: FC = () => {
     <S.WaitingRoom>
       <S.WaitingRoomBody>
         <S.WaintingRoomContent>
-          <S.CameraWrap />
+          <S.CameraWrap>
+            <Camera />
+          </S.CameraWrap>
           <S.StartWrap>
             <Typography tag="h3" fontSize="large">
               참여할 준비가 되셨나요?

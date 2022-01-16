@@ -9,6 +9,7 @@ export const ProfileWrap = styled.div`
   background: #222;
   border-radius: 1rem;
   margin: 0.5rem;
+  overflow: hidden;
 
   ${media('tablet')} {
     width: 80vw;

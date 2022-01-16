@@ -1,3 +1,4 @@
+import Camera from '@src/components/atoms/Camera';
 import { FC } from 'react';
 import * as S from './style';
 
@@ -6,7 +7,9 @@ type ProfileProps = {
 };
 
 const Profile: FC<ProfileProps> = ({ type }) => {
-  return <S.ProfileWrap></S.ProfileWrap>;
+  return (
+    <S.ProfileWrap>{type === 'interviewee' && <Camera record />}</S.ProfileWrap>
+  );
 };
 
 export default Profile;
