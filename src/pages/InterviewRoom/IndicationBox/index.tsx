@@ -5,22 +5,22 @@ import QuestionBox from './QuestionBox';
 import * as S from './style';
 
 interface IndicationBoxProps {
-  start: boolean;
+  isInterviewing: boolean;
   question: Question;
   startQuestion: () => void;
-  setStandby: (standby: boolean) => void;
+  start: () => void;
 }
 
 export const IndicationBox: FC<IndicationBoxProps> = ({
-  start,
+  isInterviewing,
   question,
   startQuestion,
-  setStandby,
+  start,
 }) => {
   const isQuestionEnd = !!question;
 
   // 준비 중
-  if (!start) {
+  if (!isInterviewing) {
     return (
       <S.IndicationBoxWrap>
         <Button
@@ -40,7 +40,7 @@ export const IndicationBox: FC<IndicationBoxProps> = ({
   return (
     <S.IndicationBoxWrap>
       {isQuestionEnd ? (
-        <QuestionBox question={question} start={() => setStandby(false)} />
+        <QuestionBox question={question} start={start} />
       ) : (
         <Typography
           fontSize="large"

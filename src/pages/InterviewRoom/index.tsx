@@ -1,10 +1,9 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useReducer, useState } from 'react';
 import * as S from './style';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import {
   Answer,
   answerState,
-  Seconds,
   Question,
   questionState,
   QuestionSet,
@@ -13,13 +12,11 @@ import {
 } from '@src/stores/question';
 import EnterSFX from '@src/assets/audios/enter.mp3';
 import { draw, shuffle } from '@src/utils/utils';
-import { useAudio } from '@src/hooks';
+import { useAudio, useReducerWithoutDispatch, useStopwatch } from '@src/hooks';
 import { LoadingIndicator } from './Loading';
 import { InterviewRoomBody } from './Body';
 import { InterviewRoomFooter } from './Footer';
 import { IndicationBox } from './IndicationBox';
-
-const MILLSEC_PER_SEC: number = 1000;
 
 type MiddleQuestions = {
   essential: Question[];
@@ -40,19 +37,21 @@ const InterviewRoom: FC = () => {
   const [questions, setQuestions] = useRecoilState<Question[]>(questionState);
   const [answerList, setAnswerList] = useRecoilState<Answer[]>(answerState);
   const { isLoading, audio } = useAudio(EnterSFX, true);
-
-  const [start, setStart] = useState(false);
-  const [standby, setStandby] = useState(true);
-  const [index, setIndex] = useState(0);
-  const [timer, setTimer] = useState(new Date().getTime());
+  const { startStopWatch, getCurrentWatch } = useStopwatch();
+  const [QIndex, nextQIndex] = useReducer((index: number) => index + 1, 0);
+  const [isInterviewing, [startInterview]] = useReducerWithoutDispatch(false, {
+    startInterview: () => true,
+  });
+  const [standby, [ready, start]] = useReducerWithoutDispatch(true, {
+    ready: () => true,
+    start: () => false,
+  });
 
   useEffect(() => {
-    if (!start) {
-      return;
-    }
+    if (!isInterviewing) return;
 
     if (!standby) {
-      setTimer(new Date().getTime());
+      startStopWatch();
       return;
     }
   }, [standby]);
@@ -72,22 +71,18 @@ const InterviewRoom: FC = () => {
   const startQuestion = () => {
     setAnswerList([]);
     setQuestions(shuffleQuestion);
-    setStart(true);
+    startInterview();
   };
 
   const handelNextQuestion = () => {
-    const now = new Date().getTime();
-
-    const time: Seconds = (now - timer) / MILLSEC_PER_SEC;
-
     const answer: Answer = {
-      question: questions[index],
-      time,
+      question: questions[QIndex],
+      time: getCurrentWatch(),
     };
 
     setAnswerList([...answerList, answer]);
-    setIndex(index + 1);
-    setStandby(true);
+    nextQIndex();
+    ready();
   };
 
   return (
@@ -98,14 +93,14 @@ const InterviewRoom: FC = () => {
         <>
           <InterviewRoomBody />
           <InterviewRoomFooter
-            showNextButton={index === 0 || !!questions[index]}
+            showNextButton={QIndex === 0 || !!questions[QIndex]}
             handelNextQuestion={handelNextQuestion}
             standby={standby}
           />
           <IndicationBox
+            isInterviewing={isInterviewing}
+            question={questions[QIndex]}
             start={start}
-            question={questions[index]}
-            setStandby={setStandby}
             startQuestion={startQuestion}
           />
         </>
