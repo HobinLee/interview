@@ -1,11 +1,11 @@
 import { useState, VFC } from 'react';
 import { Typography } from '@src/components/atoms';
-import { useNavigate } from 'react-router-dom';
 import { ROUTE_HOME, ROUTE_REVIEW } from '@src/routes';
 import { FooterButton } from './FooterButton';
 import { AiOutlineFileSearch, AiOutlineRight } from 'react-icons/ai';
 import { MdCallEnd } from 'react-icons/md';
 import * as S from './styles';
+import { usePage } from '@src/hooks';
 
 interface FooterProps {
   standby: boolean;
@@ -18,15 +18,8 @@ export const InterviewRoomFooter: VFC<FooterProps> = ({
   handelNextQuestion,
   showNextButton,
 }) => {
-  const navigate = useNavigate();
+  const [moveToHome, moveToReview] = usePage([ROUTE_HOME, ROUTE_REVIEW]);
   const [startTime] = useState(new Date().toString().slice(16, 25));
-
-  const moveToHome = () => {
-    navigate(ROUTE_HOME);
-  };
-  const moveToReview = () => {
-    navigate(ROUTE_REVIEW);
-  };
 
   return (
     <S.InterviewRoomFooter>

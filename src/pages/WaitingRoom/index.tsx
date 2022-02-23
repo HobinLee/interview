@@ -1,21 +1,16 @@
 import { Button, Typography } from '@src/components/atoms';
 import Camera from '@src/components/atoms/Camera';
+import { usePage } from '@src/hooks';
 import { ROUTE_INTERVIEW, ROUTE_SETTING } from '@src/routes';
 import { FC } from 'react';
-
-import { useNavigate } from 'react-router-dom';
 
 import * as S from './style';
 
 const WaitingRoom: FC = () => {
-  const navigate = useNavigate();
-
-  const moveToInterviewRoom = () => {
-    navigate(ROUTE_INTERVIEW);
-  };
-  const moveToSettingRoom = () => {
-    navigate(ROUTE_SETTING);
-  };
+  const [moveToInterviewRoom, moveToSettingRoom] = usePage([
+    ROUTE_INTERVIEW,
+    ROUTE_SETTING,
+  ]);
 
   return (
     <S.WaitingRoom>
