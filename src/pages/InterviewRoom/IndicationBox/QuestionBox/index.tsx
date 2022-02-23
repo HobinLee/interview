@@ -1,34 +1,21 @@
 import { FC, useEffect, useState } from 'react';
 import { Question, Seconds } from '@src/stores/question';
 import { Typography } from '@src/components/atoms';
+import useTimer from '@src/hooks/useTimer';
 
 const STAND_BY_SECONDS = 3;
-const ONE_SECOND = 1000;
 
 type QuestionBoxProps = {
   question: Question;
-  setStandby: (standby: boolean) => void;
+  start: () => void;
 };
 
-const QuestionBox: FC<QuestionBoxProps> = ({ question, setStandby }) => {
-  const [timer, setTimer] = useState<Seconds>(STAND_BY_SECONDS);
+const QuestionBox: FC<QuestionBoxProps> = ({ question, start }) => {
+  const { timer, initTimer } = useTimer(STAND_BY_SECONDS, start);
 
   useEffect(() => {
-    setTimer(STAND_BY_SECONDS);
+    initTimer();
   }, [question]);
-
-  useEffect(() => {
-    if (!timer) {
-      setStandby(false);
-      return;
-    }
-
-    const timeout = setTimeout(() => {
-      setTimer(timer - 1);
-    }, ONE_SECOND);
-
-    return () => clearTimeout(timeout);
-  }, [timer]);
 
   return timer ? (
     <>

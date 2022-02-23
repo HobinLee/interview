@@ -40,7 +40,7 @@ export const IndicationBox: FC<IndicationBoxProps> = ({
   return (
     <S.IndicationBoxWrap>
       {isQuestionEnd ? (
-        <QuestionBox question={question} setStandby={setStandby} />
+        <QuestionBox question={question} start={() => setStandby(false)} />
       ) : (
         <Typography
           fontSize="large"
