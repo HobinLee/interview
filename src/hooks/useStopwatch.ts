@@ -1,4 +1,4 @@
-import { Seconds } from '@src/stores/question';
+import { Seconds } from '@src/types/common';
 import { useState } from 'react';
 
 const MILLSEC_PER_SEC: number = 1000;
@@ -10,7 +10,7 @@ export default () => {
     startStopWatch: () => {
       setTimer(new Date().getTime());
     },
-    getCurrentWatch: () => {
+    getStopWatchTime: () => {
       const now = new Date().getTime();
 
       const time = (now - timer) / MILLSEC_PER_SEC;

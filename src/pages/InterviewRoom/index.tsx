@@ -17,7 +17,7 @@ const InterviewRoom: FC = () => {
   const { question, shuffleQuestion, nextQuestion } = useQuestion();
   const { initAnswerList, addAnswer } = useAnswer();
   const { isLoading, audio } = useAudio(EnterSFX, true);
-  const { startStopWatch, getCurrentWatch } = useStopwatch();
+  const { startStopWatch, getStopWatchTime } = useStopwatch();
   const [isInterviewing, [startInterview]] = useReducerWithoutDispatch(false, {
     startInterview: () => true,
   });
@@ -34,18 +34,6 @@ const InterviewRoom: FC = () => {
       return;
     }
   }, [standby]);
-
-  const handleStartInterview = () => {
-    shuffleQuestion();
-    initAnswerList();
-    startInterview();
-  };
-
-  const handelNextQuestion = () => {
-    addAnswer(question, getCurrentWatch());
-    nextQuestion();
-    ready();
-  };
 
   return (
     <S.InterviewRoom>
@@ -70,6 +58,18 @@ const InterviewRoom: FC = () => {
       {audio}
     </S.InterviewRoom>
   );
+
+  function handleStartInterview() {
+    shuffleQuestion();
+    initAnswerList();
+    startInterview();
+  }
+
+  function handelNextQuestion() {
+    addAnswer(question, getStopWatchTime());
+    nextQuestion();
+    ready();
+  }
 };
 
 export default InterviewRoom;

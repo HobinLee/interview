@@ -1,5 +1,5 @@
 import { Button, Typography } from '@src/components/atoms';
-import { Question } from '@src/stores/question';
+import { Question } from '@src/types/question';
 import { FC } from 'react';
 import QuestionBox from './QuestionBox';
 import * as S from './style';

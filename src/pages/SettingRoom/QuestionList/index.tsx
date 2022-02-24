@@ -1,15 +1,11 @@
-import {
-  Question,
-  QuestionSet,
-  QuestionSetKey,
-  questionSetKeyState,
-} from '@src/stores/question';
 import * as S from './style';
 import { FC, useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { useInput } from '@src/hooks';
 import QuestionElement from '../Question';
 import { Button, Input, Typography } from '@src/components/atoms';
+import { Question, QuestionSet } from '@src/types/question';
+import { questionSetKeyState } from '@src/stores/question';
 
 const questionTypeInfo = {
   begin: {
@@ -37,7 +33,7 @@ type QuestionListProps = {
 
 const QuestionList: FC<QuestionListProps> = ({ type }) => {
   const { value: newQuestion, onChange, setValue } = useInput('');
-  const questionSet: QuestionSetKey = useRecoilValue(questionSetKeyState);
+  const questionSet: Question = useRecoilValue(questionSetKeyState);
 
   const [list, setList] = useState<Question[]>(
     JSON.parse(localStorage.getItem(questionSet) ?? '{}')[type] ?? [],

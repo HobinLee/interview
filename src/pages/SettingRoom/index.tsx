@@ -1,26 +1,18 @@
 import * as S from './style';
 import QuestionList from './QuestionList';
-import { useRecoilValue } from 'recoil';
-import { questionSetKeyState } from '@src/stores/question';
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 import { HomeButton } from '@src/components/molecules';
 
-const SettingRoom: FC = () => {
-  const questionSetKey = useRecoilValue(questionSetKeyState);
-  useEffect(() => {
-    console.log(questionSetKey);
-  }, [, questionSetKeyState]);
-  return (
-    <S.SettingRoom>
-      <S.SettingRoomBody>
-        <QuestionList type="begin" />
-        <QuestionList type="essential" />
-        <QuestionList type="random" />
-        <QuestionList type="end" />
-      </S.SettingRoomBody>
-      <HomeButton />
-    </S.SettingRoom>
-  );
-};
+const SettingRoom: FC = () => (
+  <S.SettingRoom>
+    <S.SettingRoomBody>
+      <QuestionList type="begin" />
+      <QuestionList type="essential" />
+      <QuestionList type="random" />
+      <QuestionList type="end" />
+    </S.SettingRoomBody>
+    <HomeButton />
+  </S.SettingRoom>
+);
 
 export default SettingRoom;

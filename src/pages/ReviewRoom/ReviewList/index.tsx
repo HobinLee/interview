@@ -1,10 +1,10 @@
 import { Typography } from '@src/components/atoms';
-import { useAnswerStore } from '@src/stores/question';
+import { useAnswer } from '@src/hooks';
 import { VFC } from 'react';
 import * as S from './styles';
 
 export const ReviewList: VFC = () => {
-  const { answerList } = useAnswerStore();
+  const { answerList } = useAnswer();
 
   const answers = answerList.map((answer, idx) => (
     <S.ReviewListElement key={idx}>

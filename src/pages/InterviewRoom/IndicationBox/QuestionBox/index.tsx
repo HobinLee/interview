@@ -1,7 +1,7 @@
-import { FC, useEffect, useState } from 'react';
-import { Question, Seconds } from '@src/stores/question';
+import { FC, useEffect } from 'react';
 import { Typography } from '@src/components/atoms';
 import useTimer from '@src/hooks/useTimer';
+import { Question } from '@src/types/question';
 
 const STAND_BY_SECONDS = 3;
 
