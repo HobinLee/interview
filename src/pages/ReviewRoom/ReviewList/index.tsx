@@ -1,13 +1,12 @@
 import { Typography } from '@src/components/atoms';
-import { Answer, answerState } from '@src/stores/question';
+import { useAnswerStore } from '@src/stores/question';
 import { VFC } from 'react';
-import { useRecoilValue } from 'recoil';
 import * as S from './styles';
 
 export const ReviewList: VFC = () => {
-  const answers: Answer[] = useRecoilValue<Answer[]>(answerState);
+  const { answerList } = useAnswerStore();
 
-  const answerList = answers.map((answer, idx) => (
+  const answers = answerList.map((answer, idx) => (
     <S.ReviewListElement key={idx}>
       <S.QuestionWrap>
         <Typography fontSize="normal" fontWeight="bold" ellipsis>
@@ -42,7 +41,7 @@ export const ReviewList: VFC = () => {
           시간
         </Typography>
       </S.ReviewListElement>
-      {answerList}
+      {answers}
     </S.ReviewList>
   );
 };
