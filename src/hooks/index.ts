@@ -4,3 +4,4 @@ export { default as usePage } from './usePage';
 export { default as useTimer } from './useTimer';
 export { default as useStopwatch } from './useStopwatch';
 export { default as useReducerWithoutDispatch } from './useReducerWithoutDispatch';
+export { default as useQuestion } from './useQuestion';

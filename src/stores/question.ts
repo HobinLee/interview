@@ -1,5 +1,4 @@
-import { draw, shuffle } from '@src/utils/utils';
-import { atom, RecoilState, useRecoilState, useRecoilValue } from 'recoil';
+import { atom, useRecoilState } from 'recoil';
 
 export type Question = string;
 
@@ -10,49 +9,10 @@ export type QuestionSet = {
   end: Question[];
 };
 
-const questionState = atom<Question[]>({
+export const questionState = atom<Question[]>({
   key: 'question',
   default: [],
 });
-
-type MiddleQuestions = {
-  essential: Question[];
-  random: Question[];
-};
-
-const getQuestions = ({ essential, random }: MiddleQuestions): Question[] => {
-  const QUESTION_COUNT = 15;
-  const restCount = QUESTION_COUNT - essential.length;
-
-  const questions: Question[] = [...essential, ...draw(random, restCount)];
-
-  return shuffle(questions);
-};
-
-const shuffleQuestion = (questionSetKey: string): Question[] => {
-  const questionSet: QuestionSet = JSON.parse(
-    localStorage.getItem(questionSetKey) ?? '{}',
-  );
-
-  return [
-    ...questionSet.begin,
-    ...getQuestions(questionSet),
-    ...questionSet.end,
-  ];
-};
-
-export const useQuestionStore = () => {
-  const questionSetKey = useRecoilValue<QuestionSetKey>(questionSetKeyState);
-  const [questionList, setQuestionList] =
-    useRecoilState<Question[]>(questionState);
-
-  return {
-    questionList,
-    shuffleQuestion: () => {
-      setQuestionList(shuffleQuestion(questionSetKey));
-    },
-  };
-};
 
 export type Seconds = number;
 
