@@ -1,28 +1,23 @@
-import { FC, useEffect, useReducer, useState } from 'react';
+import { FC, useEffect, useReducer } from 'react';
 import * as S from './style';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import {
-  Answer,
-  Question,
-  QuestionSet,
-  questionSetKeyState,
-  QuestionSetKey,
-  useAnswerStore,
-  useQuestionStore,
-} from '@src/stores/question';
 import EnterSFX from '@src/assets/audios/enter.mp3';
-import { useAudio, useReducerWithoutDispatch, useStopwatch } from '@src/hooks';
+import {
+  useAnswer,
+  useAudio,
+  useReducerWithoutDispatch,
+  useStopwatch,
+} from '@src/hooks';
 import { LoadingIndicator } from './Loading';
 import { InterviewRoomBody } from './Body';
 import { InterviewRoomFooter } from './Footer';
 import { IndicationBox } from './IndicationBox';
+import { useQuestion } from '@src/hooks';
 
 const InterviewRoom: FC = () => {
-  const { questionList, shuffleQuestion } = useQuestionStore();
-  const { initAnswerList, addAnswer } = useAnswerStore();
+  const { question, shuffleQuestion, nextQuestion } = useQuestion();
+  const { initAnswerList, addAnswer } = useAnswer();
   const { isLoading, audio } = useAudio(EnterSFX, true);
   const { startStopWatch, getCurrentWatch } = useStopwatch();
-  const [QIndex, nextQIndex] = useReducer((index: number) => index + 1, 0);
   const [isInterviewing, [startInterview]] = useReducerWithoutDispatch(false, {
     startInterview: () => true,
   });
@@ -40,20 +35,15 @@ const InterviewRoom: FC = () => {
     }
   }, [standby]);
 
-  const startQuestion = () => {
+  const handleStartInterview = () => {
     shuffleQuestion();
     initAnswerList();
     startInterview();
   };
 
   const handelNextQuestion = () => {
-    const answer: Answer = {
-      question: questionList[QIndex],
-      time: getCurrentWatch(),
-    };
-
-    addAnswer(answer);
-    nextQIndex();
+    addAnswer(question, getCurrentWatch());
+    nextQuestion();
     ready();
   };
 
@@ -65,15 +55,15 @@ const InterviewRoom: FC = () => {
         <>
           <InterviewRoomBody />
           <InterviewRoomFooter
-            isLastQuestion={isInterviewing && !questionList[QIndex]}
+            isEndQuestion={isInterviewing && !question}
             handelNextQuestion={handelNextQuestion}
             standby={standby}
           />
           <IndicationBox
             isInterviewing={isInterviewing}
-            question={questionList[QIndex]}
+            question={question}
             start={start}
-            startInterview={startQuestion}
+            startInterview={handleStartInterview}
           />
         </>
       )}
