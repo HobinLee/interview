@@ -93,7 +93,7 @@ const InterviewRoom: FC = () => {
         <>
           <InterviewRoomBody />
           <InterviewRoomFooter
-            showNextButton={QIndex === 0 || !!questions[QIndex]}
+            isLastQuestion={isInterviewing && !questions[QIndex]}
             handelNextQuestion={handelNextQuestion}
             standby={standby}
           />
@@ -101,7 +101,7 @@ const InterviewRoom: FC = () => {
             isInterviewing={isInterviewing}
             question={questions[QIndex]}
             start={start}
-            startQuestion={startQuestion}
+            startInterview={startQuestion}
           />
         </>
       )}

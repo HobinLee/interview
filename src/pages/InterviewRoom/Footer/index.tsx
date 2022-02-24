@@ -10,13 +10,13 @@ import { usePage } from '@src/hooks';
 interface FooterProps {
   standby: boolean;
   handelNextQuestion: () => void;
-  showNextButton: boolean;
+  isLastQuestion: boolean;
 }
 
 export const InterviewRoomFooter: VFC<FooterProps> = ({
   standby,
   handelNextQuestion,
-  showNextButton,
+  isLastQuestion,
 }) => {
   const [moveToHome, moveToReview] = usePage([ROUTE_HOME, ROUTE_REVIEW]);
   const [startTime] = useState(new Date().toString().slice(16, 25));
@@ -39,13 +39,13 @@ export const InterviewRoomFooter: VFC<FooterProps> = ({
 
       <FooterButton
         color="blue"
-        disabled={showNextButton && standby}
-        onClick={showNextButton ? handelNextQuestion : moveToReview}
+        disabled={!isLastQuestion && standby}
+        onClick={!isLastQuestion ? handelNextQuestion : moveToReview}
       >
-        {showNextButton ? (
-          <AiOutlineRight stroke="#fff" />
-        ) : (
+        {isLastQuestion ? (
           <AiOutlineFileSearch />
+        ) : (
+          <AiOutlineRight stroke="#fff" />
         )}
       </FooterButton>
       <FooterButton color="red" onClick={moveToHome}>

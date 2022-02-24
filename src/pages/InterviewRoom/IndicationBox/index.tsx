@@ -7,14 +7,14 @@ import * as S from './style';
 interface IndicationBoxProps {
   isInterviewing: boolean;
   question: Question;
-  startQuestion: () => void;
+  startInterview: () => void;
   start: () => void;
 }
 
 export const IndicationBox: FC<IndicationBoxProps> = ({
   isInterviewing,
   question,
-  startQuestion,
+  startInterview,
   start,
 }) => {
   const isQuestionEnd = !!question;
@@ -24,7 +24,7 @@ export const IndicationBox: FC<IndicationBoxProps> = ({
     return (
       <S.IndicationBoxWrap>
         <Button
-          onClick={startQuestion}
+          onClick={startInterview}
           color="green"
           isFilled
           borderRadius="large"
