@@ -1,4 +1,4 @@
-import { Seconds } from '@src/stores/question';
+import { Seconds } from '@src/types/common';
 import { useCallback, useEffect, useState } from 'react';
 
 const ONE_SECOND = 1000;

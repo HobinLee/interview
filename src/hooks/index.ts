@@ -6,3 +6,4 @@ export { default as useStopwatch } from './useStopwatch';
 export { default as useReducerWithoutDispatch } from './useReducerWithoutDispatch';
 export { default as useQuestion } from './useQuestion';
 export { default as useAnswer } from './useAnswer';
+export { default as useLocalStorage } from './useLocalStorage';

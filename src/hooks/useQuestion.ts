@@ -1,10 +1,5 @@
-import {
-  Question,
-  QuestionSet,
-  QuestionSetKey,
-  questionSetKeyState,
-  questionState,
-} from '@src/stores/question';
+import { questionSetKeyState, questionState } from '@src/stores/question';
+import { Question, QuestionSet, QuestionSetKey } from '@src/types/question';
 import { draw, shuffle } from '@src/utils/utils';
 import { useReducer } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';

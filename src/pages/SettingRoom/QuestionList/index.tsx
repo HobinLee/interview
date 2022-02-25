@@ -1,7 +1,7 @@
 import * as S from './style';
 import { FC, useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
-import { useInput } from '@src/hooks';
+import { useInput, useLocalStorage } from '@src/hooks';
 import QuestionElement from '../Question';
 import { Button, Input, Typography } from '@src/components/atoms';
 import { Question, QuestionSet } from '@src/types/question';
@@ -33,41 +33,17 @@ type QuestionListProps = {
 
 const QuestionList: FC<QuestionListProps> = ({ type }) => {
   const { value: newQuestion, onChange, setValue } = useInput('');
-  const questionSet: Question = useRecoilValue(questionSetKeyState);
+  const { questionList, addQuestion, deleteQuestion, modifyQuestion } =
+    useQuestionListHandler(type);
 
-  const [list, setList] = useState<Question[]>(
-    JSON.parse(localStorage.getItem(questionSet) ?? '{}')[type] ?? [],
-  );
-
-  useEffect(() => {
-    const newSet: QuestionSet = {
-      ...JSON.parse(localStorage.getItem(questionSet) ?? '{}'),
-    };
-
-    newSet[type] = list;
-
-    localStorage.setItem(questionSet, JSON.stringify(newSet));
-  }, [list]);
-
-  const modifyQuestion = (newQ: Question, i: number) => {
-    const newList = list.map((q: Question, idx: number) =>
-      idx === i ? newQ : q,
-    );
-
-    setList(newList);
-  };
-
-  const handleAddQuestion = () => {
-    setList([...list, newQuestion]);
-    setValue('');
-  };
-
-  const questionList = list.map((q: Question, idx: number) => (
+  const questions = questionList.map((q: Question, idx: number) => (
     <QuestionElement
       key={idx + q}
       question={q}
       modifyQuestion={(newQ: Question) => modifyQuestion(newQ, idx)}
-      deleteQuestion={() => setList(list.filter((_, i: number) => i !== idx))}
+      deleteQuestion={() => {
+        deleteQuestion(idx);
+      }}
     />
   ));
 
@@ -88,7 +64,10 @@ const QuestionList: FC<QuestionListProps> = ({ type }) => {
             fontSize="small"
           />
           <Button
-            onClick={handleAddQuestion}
+            onClick={() => {
+              addQuestion(newQuestion);
+              setValue('');
+            }}
             color="green"
             fontSize="small"
             disabled={!newQuestion.length}
@@ -96,10 +75,40 @@ const QuestionList: FC<QuestionListProps> = ({ type }) => {
             추가
           </Button>
         </S.AddQuestionWrap>
-        {questionList}
+        {questions}
       </S.QuestionList>
     </S.QuestionListSection>
   );
 };
+
+function useQuestionListHandler(type: QuestionType) {
+  const questionSetKey: Question = useRecoilValue(questionSetKeyState);
+  const [questionSet, setQuestionSet] = useLocalStorage<QuestionSet>(
+    questionSetKey,
+    { begin: [], essential: [], random: [], end: [] },
+  );
+  const questionList = questionSet[type];
+
+  const modifyQuestion = (newQ: Question, idx: number) => {
+    questionSet[type] = questionList.map((question: Question, i: number) =>
+      idx === i ? newQ : question,
+    );
+
+    setQuestionSet({
+      ...questionSet,
+    });
+  };
+
+  const addQuestion = (newQuestion: Question) => {
+    questionSet[type].push(newQuestion);
+    setQuestionSet({ ...questionSet });
+  };
+
+  const deleteQuestion = (idx: number) => {
+    questionSet[type] = questionList.filter((_, i: number) => i !== idx);
+    setQuestionSet({ ...questionSet });
+  };
+  return { questionList, modifyQuestion, addQuestion, deleteQuestion };
+}
 
 export default QuestionList;

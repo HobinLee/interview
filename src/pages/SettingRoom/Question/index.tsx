@@ -1,8 +1,8 @@
 import { Button, Input, Typography } from '@src/components/atoms';
 import { FC, useState } from 'react';
 import { useInput } from '@src/hooks';
-import { Question } from '@src/stores/question';
 import * as S from './style';
+import { Question } from '@src/types/question';
 
 type QuestionProps = {
   question: Question;
