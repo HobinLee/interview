@@ -33,7 +33,6 @@ export const WaintingRoomContent = styled.div`
 export const CameraWrap = styled.div`
   width: 50vw;
   height: 28vw;
-  background: #333;
   width: 50vw;
   height: 28vw;
   min-width: 400px;

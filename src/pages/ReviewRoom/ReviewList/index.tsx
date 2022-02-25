@@ -1,10 +1,11 @@
 import { Typography } from '@src/components/atoms';
-import { useAnswer } from '@src/hooks';
+import { answerState } from '@src/stores/answer';
 import { VFC } from 'react';
+import { useRecoilValue } from 'recoil';
 import * as S from './styles';
 
 export const ReviewList: VFC = () => {
-  const { answerList } = useAnswer();
+  const answerList = useRecoilValue(answerState);
 
   const answers = answerList.map((answer, idx) => (
     <S.ReviewListElement key={idx}>
