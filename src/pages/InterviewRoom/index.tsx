@@ -12,6 +12,7 @@ import { answerState } from '@src/stores/answer';
 import { Seconds } from '@src/types/common';
 import { Question } from '@src/types/question';
 import { Answer } from '@src/types/answer';
+import { standbyState } from '@src/stores/interview';
 
 const InterviewRoom: FC = () => {
   const { question, shuffleQuestion, nextQuestion } = useQuestion();
@@ -21,10 +22,7 @@ const InterviewRoom: FC = () => {
   const [isInterviewing, [startInterview]] = useReducerWithoutDispatch(false, {
     startInterview: () => true,
   });
-  const [standby, [ready, start]] = useReducerWithoutDispatch(true, {
-    ready: () => true,
-    start: () => false,
-  });
+  const [standby, setStandby] = useRecoilState(standbyState);
 
   useEffect(() => {
     if (!isInterviewing) return;
@@ -45,12 +43,10 @@ const InterviewRoom: FC = () => {
           <InterviewRoomFooter
             isEndQuestion={isInterviewing && !question}
             handelNextQuestion={handelNextQuestion}
-            standby={standby}
           />
           <IndicationBox
             isInterviewing={isInterviewing}
             question={question}
-            start={start}
             startInterview={handleStartInterview}
           />
         </>
@@ -68,7 +64,7 @@ const InterviewRoom: FC = () => {
   function handelNextQuestion() {
     addAnswer(question, getStopWatchTime());
     nextQuestion();
-    ready();
+    setStandby(true);
   }
 };
 

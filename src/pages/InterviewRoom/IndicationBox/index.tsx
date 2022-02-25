@@ -1,6 +1,8 @@
 import { Button, Typography } from '@src/components/atoms';
+import { standbyState } from '@src/stores/interview';
 import { Question } from '@src/types/question';
 import { FC } from 'react';
+import { useSetRecoilState } from 'recoil';
 import QuestionBox from './QuestionBox';
 import * as S from './style';
 
@@ -8,16 +10,15 @@ interface IndicationBoxProps {
   isInterviewing: boolean;
   question: Question;
   startInterview: () => void;
-  start: () => void;
 }
 
 export const IndicationBox: FC<IndicationBoxProps> = ({
   isInterviewing,
   question,
   startInterview,
-  start,
 }) => {
   const isQuestionEnd = !!question;
+  const setStandby = useSetRecoilState(standbyState);
 
   // 준비 중
   if (!isInterviewing) {
@@ -40,7 +41,12 @@ export const IndicationBox: FC<IndicationBoxProps> = ({
   return (
     <S.IndicationBoxWrap>
       {isQuestionEnd ? (
-        <QuestionBox question={question} start={start} />
+        <QuestionBox
+          question={question}
+          start={() => {
+            setStandby(false);
+          }}
+        />
       ) : (
         <Typography
           fontSize="large"
