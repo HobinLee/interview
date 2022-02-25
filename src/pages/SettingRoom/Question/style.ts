@@ -7,6 +7,10 @@ export const QuestionElement = styled.li`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+
+  .buttons-wrapper {
+    display: flex;
+  }
 `;
 
 export const ButtonsWrap = styled.div`

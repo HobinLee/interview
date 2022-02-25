@@ -1,6 +1,6 @@
 import { Button, Input, Typography } from '@src/components/atoms';
 import { FC, useState } from 'react';
-import { useInput } from '@src/hooks';
+import { useInput, useReducerWithoutDispatch } from '@src/hooks';
 import * as S from './style';
 import { Question } from '@src/types/question';
 
@@ -15,28 +15,20 @@ const QuestionElement: FC<QuestionProps> = ({
   modifyQuestion,
   deleteQuestion,
 }) => {
-  const [isModify, setModify] = useState(false);
+  const [isModifying, [startModify, endModify]] = useReducerWithoutDispatch(
+    false,
+    {
+      startModify: () => true,
+      endModify: () => false,
+    },
+  );
   const {
     value: modifiedQuestion,
     onChange: handleModifiedQuestion,
     setValue: setModifiedQuestion,
   } = useInput(question);
 
-  const handleModify = () => {
-    setModify(true);
-  };
-
-  const handleConfirmModify = () => {
-    modifyQuestion(modifiedQuestion);
-    setModify(false);
-  };
-
-  const handleCancelModify = () => {
-    setModifiedQuestion(question);
-    setModify(false);
-  };
-
-  if (isModify) {
+  if (isModifying) {
     return (
       <S.QuestionElement>
         <Input
@@ -46,10 +38,24 @@ const QuestionElement: FC<QuestionProps> = ({
           fontSize="small"
         />
         <div className="buttons-wrapper">
-          <Button onClick={handleConfirmModify} color="blue" fontSize="small">
+          <Button
+            onClick={() => {
+              modifyQuestion(modifiedQuestion);
+              endModify();
+            }}
+            color="blue"
+            fontSize="small"
+          >
             수정
           </Button>
-          <Button onClick={handleCancelModify} color="gray" fontSize="small">
+          <Button
+            onClick={() => {
+              setModifiedQuestion(question);
+              endModify();
+            }}
+            color="gray"
+            fontSize="small"
+          >
             취소
           </Button>
         </div>
@@ -63,7 +69,7 @@ const QuestionElement: FC<QuestionProps> = ({
         {question}
       </Typography>
       <div className="buttons-wrapper">
-        <Button onClick={handleModify} color="blue" fontSize="small">
+        <Button onClick={startModify} color="blue" fontSize="small">
           수정
         </Button>
         <Button onClick={deleteQuestion} color="red" fontSize="small">
