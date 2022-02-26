@@ -7,8 +7,12 @@ type ProfileProps = {
 };
 
 const Profile: FC<ProfileProps> = ({ type }) => {
+  if (type !== 'interviewee') return <S.ProfileWrap />;
   return (
-    <S.ProfileWrap>{type === 'interviewee' && <Camera record />}</S.ProfileWrap>
+    <S.ProfileWrap>
+      <Camera />
+      <Camera record />
+    </S.ProfileWrap>
   );
 };
 
