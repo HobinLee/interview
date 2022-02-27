@@ -1,8 +1,9 @@
 import { Typography } from '@src/components/atoms';
 import { answerState } from '@src/stores/answer';
 import { recordsState } from '@src/stores/records';
-import { useEffect, VFC } from 'react';
+import { VFC } from 'react';
 import { useRecoilValue } from 'recoil';
+import { RecordPlayer } from '../RecordPlayer';
 import * as S from './styles';
 
 export const ReviewList: VFC = () => {
@@ -19,6 +20,7 @@ export const ReviewList: VFC = () => {
       <S.TimeWrap>
         <Typography>{answer.time}'</Typography>
       </S.TimeWrap>
+      <RecordPlayer record={recordList[idx]} />
     </S.ReviewListElement>
   ));
 

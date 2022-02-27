@@ -1,7 +1,7 @@
 import { useEffect, useRef, VFC } from 'react';
 import Webcam from 'react-webcam';
 import { useRecordWebcam } from 'react-record-webcam';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
 import { standbyState } from '@src/stores/interview';
 import { recordsState } from '@src/stores/records';
@@ -44,11 +44,13 @@ function useWebcamControl(record?: boolean) {
     if (standby) {
       if (status === 'RECORDING') stop();
     } else {
+      if (status === 'ERROR') return;
       start();
     }
   }, [standby]);
 
   useEffect(() => {
+    console.log(status);
     if (!record) return;
     switch (status) {
       case 'PREVIEW':
