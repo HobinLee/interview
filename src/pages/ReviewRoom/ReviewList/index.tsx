@@ -1,12 +1,15 @@
-import { Typography } from '@src/components/atoms';
+import { Button, Typography } from '@src/components/atoms';
 import { answerState } from '@src/stores/answer';
 import { recordsState } from '@src/stores/records';
 import { VFC } from 'react';
 import { useRecoilValue } from 'recoil';
-import { RecordPlayer } from '../RecordPlayer';
 import * as S from './styles';
 
-export const ReviewList: VFC = () => {
+interface Props {
+  playThisVideo: (record: Blob | null) => void;
+}
+
+export const ReviewList: VFC<Props> = ({ playThisVideo }) => {
   const answerList = useRecoilValue(answerState);
   const recordList = useRecoilValue(recordsState);
 
@@ -20,7 +23,13 @@ export const ReviewList: VFC = () => {
       <S.TimeWrap>
         <Typography>{answer.time}'</Typography>
       </S.TimeWrap>
-      <RecordPlayer record={recordList[idx]} />
+      <Button
+        color="gray"
+        onClick={() => playThisVideo(recordList[idx])}
+        disabled={!recordList[idx]}
+      >
+        보기
+      </Button>
     </S.ReviewListElement>
   ));
 
