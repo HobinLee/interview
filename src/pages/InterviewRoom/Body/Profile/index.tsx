@@ -1,4 +1,4 @@
-import Camera from '@src/components/atoms/Camera';
+import Camera from '@src/components/molecules/Camera';
 import { FC } from 'react';
 import * as S from './style';
 
@@ -7,7 +7,10 @@ type ProfileProps = {
 };
 
 const Profile: FC<ProfileProps> = ({ type }) => {
-  if (type !== 'interviewee') return <S.ProfileWrap />;
+  if (type !== 'interviewee') {
+    return <S.ProfileWrap />;
+  }
+
   return (
     <S.ProfileWrap>
       <Camera />

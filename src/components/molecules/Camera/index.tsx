@@ -37,12 +37,18 @@ function useWebcamControl(record?: boolean) {
     if (!record) return;
     initRecordList();
     open();
+
+    return () => {
+      setRecordList([...recordList]);
+    };
   }, []);
 
   useEffect(() => {
     if (!record) return;
+
     if (standby) {
-      if (status === 'RECORDING') stop();
+      if (status !== 'RECORDING') return;
+      stop();
     } else {
       if (status === 'ERROR') return;
       start();
@@ -50,23 +56,25 @@ function useWebcamControl(record?: boolean) {
   }, [standby]);
 
   useEffect(() => {
-    console.log(status);
     if (!record) return;
-    switch (status) {
-      case 'PREVIEW':
-        saveFile();
-        break;
-      case 'ERROR':
-        addToRecordList(null);
-        break;
+
+    if (status === 'PREVIEW') {
+      saveFile();
     }
+
+    if (status === 'ERROR') {
+      addToRecordList(null);
+      open();
+    }
+
+    return;
   }, [status]);
 
   const saveFile = async () => {
     try {
-      const record: any = await getRecording();
+      const record: unknown = await getRecording();
       open();
-      addToRecordList(record);
+      addToRecordList(record as Blob);
     } catch (e) {
       addToRecordList(null);
     }
@@ -74,7 +82,6 @@ function useWebcamControl(record?: boolean) {
 
   function addToRecordList(record: Blob | null) {
     recordList.push(record);
-    setRecordList([...recordList]);
     console.log(recordList);
   }
   return webcamRef;
