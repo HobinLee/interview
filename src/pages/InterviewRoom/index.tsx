@@ -6,29 +6,42 @@ import { LoadingIndicator } from './Loading';
 import { InterviewRoomBody } from './Body';
 import { InterviewRoomFooter } from './Footer';
 import { IndicationBox } from './IndicationBox';
-import { useQuestion } from '@src/hooks';
-import { useRecoilState, useResetRecoilState } from 'recoil';
+import { useQuestion, useRecord } from '@src/hooks';
+import { useRecoilState, useResetRecoilState, useSetRecoilState } from 'recoil';
 import { answerState } from '@src/stores/answer';
 import { Seconds } from '@src/types/common';
 import { Question } from '@src/types/question';
 import { Answer } from '@src/types/answer';
 import { standbyState } from '@src/stores/interview';
-import Recorder from '@src/components/molecules/Recorder';
+import { recordsState } from '@src/stores/records';
 
 const InterviewRoom: FC = () => {
   const { question, shuffleQuestion, nextQuestion } = useQuestion();
   const { initAnswerList, addAnswer } = useAnswerControl();
-  const { isLoading, audio } = useAudio(EnterSFX, true);
   const { startStopWatch, getStopWatchTime } = useStopwatch();
   const [isInterviewing, [startInterview]] = useReducerWithoutDispatch(false, {
     startInterview: () => true,
   });
   const [standby, setStandby] = useRecoilState(standbyState);
+  const { isLoading, audio } = useAudio(EnterSFX, true);
+  const { recorder, startRecord, stopRecord, recordList } = useRecord(
+    isInterviewing && !question,
+  );
+  const setRecordList = useSetRecoilState(recordsState);
+  const initRecordList = useResetRecoilState(recordsState);
+
+  useEffect(() => {
+    initRecordList();
+    return () => {
+      setRecordList([...recordList]);
+    };
+  }, []);
 
   useEffect(() => {
     if (!isInterviewing) return;
 
     if (!standby) {
+      startRecord();
       startStopWatch();
       return;
     }
@@ -53,7 +66,7 @@ const InterviewRoom: FC = () => {
         </>
       )}
       {audio}
-      <Recorder isEndQuestion={isInterviewing && !question} />
+      {recorder}
     </S.InterviewRoom>
   );
 
@@ -67,6 +80,7 @@ const InterviewRoom: FC = () => {
     addAnswer(question, getStopWatchTime());
     nextQuestion();
     setStandby(true);
+    stopRecord();
   }
 };
 
