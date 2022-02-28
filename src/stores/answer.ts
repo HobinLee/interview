@@ -1,7 +1,25 @@
 import { Answer } from '@src/types/answer';
-import { atom } from 'recoil';
+import {
+  atom,
+  useRecoilState,
+  useRecoilValue,
+  useResetRecoilState,
+} from 'recoil';
 
-export const answerState = atom<Answer[]>({
+const answerState = atom<Answer[]>({
   key: 'result',
   default: [],
 });
+
+export const getAnswerList = () => useRecoilValue(answerState);
+
+export const useAnswerState = () => {
+  const [answerList, setAnswerList] = useRecoilState(answerState);
+  const initAnswerList = useResetRecoilState(answerState);
+
+  return {
+    answerList,
+    setAnswerList,
+    initAnswerList,
+  };
+};

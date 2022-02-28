@@ -1,8 +1,25 @@
-import { atom } from 'recoil';
+import {
+  atom,
+  useRecoilValue,
+  useResetRecoilState,
+  useSetRecoilState,
+} from 'recoil';
 
 const RECORD_KEY = 'recordState';
 
-export const recordsState = atom<(Blob | null)[]>({
+const recordState = atom<(Blob | null)[]>({
   key: RECORD_KEY,
   default: [],
 });
+
+export const useRecordState = () => {
+  const setRecordList = useSetRecoilState(recordState);
+  const initRecordList = useResetRecoilState(recordState);
+
+  return {
+    setRecordList,
+    initRecordList,
+  };
+};
+
+export const getRecordList = () => useRecoilValue(recordState);

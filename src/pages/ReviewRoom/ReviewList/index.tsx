@@ -1,8 +1,7 @@
 import { Button, Typography } from '@src/components/atoms';
-import { answerState } from '@src/stores/answer';
-import { recordsState } from '@src/stores/records';
+import { getAnswerList } from '@src/stores/answer';
+import { getRecordList } from '@src/stores/records';
 import { VFC } from 'react';
-import { useRecoilValue } from 'recoil';
 import * as S from './styles';
 
 interface Props {
@@ -10,8 +9,8 @@ interface Props {
 }
 
 export const ReviewList: VFC<Props> = ({ playThisVideo }) => {
-  const answerList = useRecoilValue(answerState);
-  const recordList = useRecoilValue(recordsState);
+  const answerList = getAnswerList();
+  const recordList = getRecordList();
 
   const answers = answerList.map((answer, idx) => (
     <S.ReviewListElement key={idx}>

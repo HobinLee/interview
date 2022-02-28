@@ -1,8 +1,7 @@
-import { questionSetKeyState, questionState } from '@src/stores/question';
-import { Question, QuestionSet, QuestionSetKey } from '@src/types/question';
+import { getQuestionSetKey, useQuestionState } from '@src/stores/question';
+import { Question, QuestionSet } from '@src/types/question';
 import { draw, shuffle } from '@src/utils/utils';
 import { useReducer } from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
 
 type MiddleQuestions = {
   essential: Question[];
@@ -31,9 +30,8 @@ const shuffleQuestion = (questionSetKey: string): Question[] => {
 };
 
 export default () => {
-  const questionSetKey = useRecoilValue<QuestionSetKey>(questionSetKeyState);
-  const [questionList, setQuestionList] =
-    useRecoilState<Question[]>(questionState);
+  const questionSetKey = getQuestionSetKey();
+  const [questionList, setQuestionList] = useQuestionState();
   const [index, nextIndex] = useReducer((index: number) => index + 1, 0);
 
   return {

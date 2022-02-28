@@ -1,12 +1,16 @@
 import { Question, QuestionSetKey } from '@src/types/question';
-import { atom } from 'recoil';
+import { atom, useRecoilState, useRecoilValue } from 'recoil';
 
-export const questionState = atom<Question[]>({
+const questionState = atom<Question[]>({
   key: 'question',
   default: [],
 });
 
-export const questionSetKeyState = atom<QuestionSetKey>({
+const questionSetKeyState = atom<QuestionSetKey>({
   key: 'questionSetKey',
   default: 'default',
 });
+
+export const useQuestionState = () => useRecoilState(questionState);
+
+export const getQuestionSetKey = () => useRecoilValue(questionSetKeyState);

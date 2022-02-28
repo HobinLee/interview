@@ -7,13 +7,12 @@ import { InterviewRoomBody } from './Body';
 import { InterviewRoomFooter } from './Footer';
 import { IndicationBox } from './IndicationBox';
 import { useQuestion, useRecord } from '@src/hooks';
-import { useRecoilState, useResetRecoilState, useSetRecoilState } from 'recoil';
-import { answerState } from '@src/stores/answer';
+import { useRecoilState } from 'recoil';
+import { useAnswerState } from '@src/stores/answer';
 import { Seconds } from '@src/types/common';
 import { Question } from '@src/types/question';
-import { Answer } from '@src/types/answer';
 import { standbyState } from '@src/stores/interview';
-import { recordsState } from '@src/stores/records';
+import { useRecordState } from '@src/stores/records';
 
 const InterviewRoom: FC = () => {
   const { question, shuffleQuestion, nextQuestion } = useQuestion();
@@ -27,8 +26,7 @@ const InterviewRoom: FC = () => {
   const { recorder, startRecord, stopRecord, recordList } = useRecord(
     isInterviewing && !question,
   );
-  const setRecordList = useSetRecoilState(recordsState);
-  const initRecordList = useResetRecoilState(recordsState);
+  const { setRecordList, initRecordList } = useRecordState();
 
   useEffect(() => {
     initRecordList();
@@ -87,8 +85,7 @@ const InterviewRoom: FC = () => {
 export default InterviewRoom;
 
 function useAnswerControl() {
-  const [answerList, setAnswerList] = useRecoilState<Answer[]>(answerState);
-  const initAnswerList = useResetRecoilState(answerState);
+  const { answerList, setAnswerList, initAnswerList } = useAnswerState();
 
   return {
     initAnswerList,

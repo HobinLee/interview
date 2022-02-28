@@ -6,8 +6,7 @@ import { AiOutlineFileSearch, AiOutlineRight } from 'react-icons/ai';
 import { MdCallEnd } from 'react-icons/md';
 import * as S from './styles';
 import { usePage } from '@src/hooks';
-import { useRecoilValue } from 'recoil';
-import { standbyState } from '@src/stores/interview';
+import { getStandby } from '@src/stores/interview';
 
 interface FooterProps {
   handelNextQuestion: () => void;
@@ -20,7 +19,7 @@ export const InterviewRoomFooter: VFC<FooterProps> = ({
 }) => {
   const [moveToHome, moveToReview] = usePage([ROUTE_HOME, ROUTE_REVIEW]);
   const [startTime] = useState(new Date().toString().slice(16, 25));
-  const standby = useRecoilValue(standbyState);
+  const standby = getStandby();
 
   return (
     <S.InterviewRoomFooter>

@@ -1,30 +1,11 @@
 import * as S from './style';
-import { FC, useEffect, useState } from 'react';
-import { useRecoilValue } from 'recoil';
+import { FC } from 'react';
 import { useInput, useLocalStorage } from '@src/hooks';
 import QuestionElement from '../Question';
 import { Button, Input, Typography } from '@src/components/atoms';
 import { Question, QuestionSet } from '@src/types/question';
-import { questionSetKeyState } from '@src/stores/question';
-
-const questionTypeInfo = {
-  begin: {
-    title: '시작 질문',
-    indication: '모든 질문이 처음에 순서대로 나옵니다',
-  },
-  essential: {
-    title: '필수 질문',
-    indication: '모든 질문이 기타 질문과 함께 섞여 무작위로 나옵니다',
-  },
-  random: {
-    title: '기타 질문',
-    indication: '일부 질문이 필수 질문과 섞여 무작위로 나옵니다',
-  },
-  end: {
-    title: '마무리 질문',
-    indication: '모든 질문이 마지막에 순서대로 나옵니다',
-  },
-};
+import { questionTypeInfo } from './data';
+import { getQuestionSetKey } from '@src/stores/question';
 
 type QuestionType = keyof typeof questionTypeInfo;
 type QuestionListProps = {
@@ -82,7 +63,7 @@ const QuestionList: FC<QuestionListProps> = ({ type }) => {
 };
 
 function useQuestionListHandler(type: QuestionType) {
-  const questionSetKey: Question = useRecoilValue(questionSetKeyState);
+  const questionSetKey = getQuestionSetKey();
   const [questionSet, setQuestionSet] = useLocalStorage<QuestionSet>(
     questionSetKey,
     { begin: [], essential: [], random: [], end: [] },
