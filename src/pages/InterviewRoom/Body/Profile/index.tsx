@@ -14,7 +14,6 @@ const Profile: FC<ProfileProps> = ({ type }) => {
   return (
     <S.ProfileWrap>
       <Camera />
-      <Camera record />
     </S.ProfileWrap>
   );
 };

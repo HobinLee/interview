@@ -1,4 +1,4 @@
-import { createElement, useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 
 export default (src: string, autoPlay?: boolean) => {
   const [isLoading, setIsLoading] = useState(true);

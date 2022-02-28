@@ -13,6 +13,7 @@ import { Seconds } from '@src/types/common';
 import { Question } from '@src/types/question';
 import { Answer } from '@src/types/answer';
 import { standbyState } from '@src/stores/interview';
+import Recorder from '@src/components/molecules/Recorder';
 
 const InterviewRoom: FC = () => {
   const { question, shuffleQuestion, nextQuestion } = useQuestion();
@@ -52,6 +53,7 @@ const InterviewRoom: FC = () => {
         </>
       )}
       {audio}
+      <Recorder isEndQuestion={isInterviewing && !question} />
     </S.InterviewRoom>
   );
 
