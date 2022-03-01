@@ -2,6 +2,7 @@ import { getQuestionSetKey, useQuestionState } from '@src/stores/question';
 import { Question, QuestionSet } from '@src/types/question';
 import { draw, shuffle } from '@src/utils/utils';
 import { useReducer } from 'react';
+import { useLocalStorage } from '@src/hooks'
 
 type MiddleQuestions = {
   essential: Question[];
@@ -17,11 +18,7 @@ const getQuestions = ({ essential, random }: MiddleQuestions): Question[] => {
   return shuffle(questions);
 };
 
-const shuffleQuestion = (questionSetKey: string): Question[] => {
-  const questionSet: QuestionSet = JSON.parse(
-    localStorage.getItem(questionSetKey) ?? '{}',
-  );
-
+const shuffleQuestion = (questionSet: QuestionSet): Question[] => {
   return [
     ...questionSet.begin,
     ...getQuestions(questionSet),
@@ -33,11 +30,12 @@ export default () => {
   const questionSetKey = getQuestionSetKey();
   const [questionList, setQuestionList] = useQuestionState();
   const [index, nextIndex] = useReducer((index: number) => index + 1, 0);
+  const [questionSet] = useLocalStorage(questionSetKey, { begin: [], essential: [], random: [], end: [] })
 
   return {
     question: questionList[index],
     shuffleQuestion: () => {
-      setQuestionList(shuffleQuestion(questionSetKey));
+      setQuestionList(shuffleQuestion(questionSet));
     },
     nextQuestion: nextIndex,
   };

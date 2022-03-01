@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 export default <T>(key: string, defaultValue?: T): [T, (value: T) => void] => {
   const [state, setState] = useState<T>(
-    JSON.parse(localStorage.getItem(key) ?? '') ?? defaultValue,
+    localStorage.getItem(key) ? JSON.parse(localStorage.getItem(key)!) : defaultValue,
   );
 
   return [
