@@ -15,6 +15,10 @@ export default (isEndQuestion: boolean) => {
   }, []);
 
   useEffect(() => {
+    if (!recordList.length && status === 'OPEN') {
+      ready();
+    }
+
     if (status === 'PREVIEW') {
       saveFile();
     }
@@ -52,5 +56,6 @@ export default (isEndQuestion: boolean) => {
     },
     recordList,
     recorder: <video style={{ display: 'none' }} ref={webcamRef} />,
+    isReadyToRecord
   };
 };

@@ -23,7 +23,7 @@ const InterviewRoom: FC = () => {
   });
   const [standby, setStandby] = useRecoilState(standbyState);
   const { isLoading, audio } = useAudio(EnterSFX, true);
-  const { recorder, startRecord, stopRecord, recordList } = useRecord(
+  const { recorder, startRecord, stopRecord, recordList, isReadyToRecord } = useRecord(
     isInterviewing && !question,
   );
   const { setRecordList, initRecordList } = useRecordState();
@@ -47,7 +47,7 @@ const InterviewRoom: FC = () => {
 
   return (
     <S.InterviewRoom>
-      {isLoading ? (
+      {!isReadyToRecord || isLoading ? (
         <LoadingIndicator />
       ) : (
         <>
