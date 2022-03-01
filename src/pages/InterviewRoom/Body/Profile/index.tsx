@@ -1,4 +1,4 @@
-import Camera from '@src/components/molecules/Camera';
+import { Camera } from '@src/components/molecules';
 import { FC } from 'react';
 import * as S from './style';
 

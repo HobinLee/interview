@@ -1,8 +1,9 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useRecordWebcam } from 'react-record-webcam';
 import { useReducerWithoutDispatch } from '.';
 
 export default (isEndQuestion: boolean) => {
+  const [permission, setPermission] = useState(true);
   const { webcamRef, start, status, open, stop, getRecording } =
     useRecordWebcam();
   const recordList = useRef<(Blob | null)[]>([]).current;
@@ -15,6 +16,8 @@ export default (isEndQuestion: boolean) => {
   }, []);
 
   useEffect(() => {
+    if(!permission) return;
+
     if (!recordList.length && status === 'OPEN') {
       ready();
     }
@@ -24,7 +27,12 @@ export default (isEndQuestion: boolean) => {
     }
 
     if (status === 'ERROR') {
-      addToRecordList(null);
+      if(isReadyToRecord) {
+        addToRecordList(null);
+      } else {
+        setPermission(false);
+        ready();
+      }
     }
 
     return;

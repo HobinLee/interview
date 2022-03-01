@@ -1,5 +1,5 @@
 import { Button, Typography } from '@src/components/atoms';
-import Camera from '@src/components/molecules/Camera';
+import { Camera } from '@src/components/molecules';
 import { usePage } from '@src/hooks';
 import { ROUTE_INTERVIEW, ROUTE_SETTING } from '@src/routes';
 import { FC } from 'react';
