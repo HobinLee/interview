@@ -7,7 +7,7 @@ left: 50%;
 transform: translateX(-50%);
 
 width: auto;
-
+z-index: 100;
 font-size: 0.8rem;
 
 animation: 0.5s forwards ${({ show }) => (show ? 'fadeIn' : 'fadeOut')};

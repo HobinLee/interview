@@ -22,11 +22,12 @@ const InterviewRoom: FC = () => {
     startInterview: () => true,
   });
   const [standby, setStandby] = useRecoilState(standbyState);
-  const { isLoading, audio } = useAudio(EnterSFX, true);
+  const { isLoading, audio, play } = useAudio(EnterSFX, false);
   const { recorder, startRecord, stopRecord, recordList, isReadyToRecord } = useRecord(
     isInterviewing && !question,
   );
   const { setRecordList, initRecordList } = useRecordState();
+  const readyToInterview = isReadyToRecord && !isLoading;
 
   useEffect(() => {
     initRecordList();
@@ -34,6 +35,11 @@ const InterviewRoom: FC = () => {
       setRecordList([...recordList]);
     };
   }, []);
+
+  useEffect(() => {
+    console.log('now ready');
+    readyToInterview && play();
+  }, [readyToInterview]);
 
   useEffect(() => {
     if (!isInterviewing) return;
@@ -47,7 +53,7 @@ const InterviewRoom: FC = () => {
 
   return (
     <S.InterviewRoom>
-      {!isReadyToRecord || isLoading ? (
+      {!readyToInterview ? (
         <LoadingIndicator />
       ) : (
         <>
