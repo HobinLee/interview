@@ -1,4 +1,14 @@
-export const questionTypeInfo = {
+import { QuestionSet } from '@src/types/question';
+
+export type QuestionType = keyof QuestionSet;
+
+
+interface Info {
+  title: string;
+  indication: string;
+}
+
+export const questionTypeInfo: Record<QuestionType, Info> = {
   begin: {
     title: '시작 질문',
     indication: '모든 질문이 처음에 순서대로 나옵니다',

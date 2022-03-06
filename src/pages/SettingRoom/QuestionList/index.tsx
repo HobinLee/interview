@@ -3,28 +3,26 @@ import { FC } from 'react';
 import { useInput, useLocalStorage } from '@src/hooks';
 import QuestionElement from '../Question';
 import { Button, Input, Typography } from '@src/components/atoms';
-import { Question, QuestionSet } from '@src/types/question';
-import { questionTypeInfo } from './data';
-import { getQuestionSetKey } from '@src/stores/question';
+import { Question } from '@src/types/question';
+import { QuestionType, questionTypeInfo } from './data';
 
-type QuestionType = keyof typeof questionTypeInfo;
-type QuestionListProps = {
+export type SetQusetionList = (type: QuestionType, questionList: Question[]) => void;
+
+export type QuestionListProps = {
   type: QuestionType;
+  questionList: Question[];
+  setQuestionList: SetQusetionList;
 };
 
-const QuestionList: FC<QuestionListProps> = ({ type }) => {
+const QuestionList: FC<QuestionListProps> = ({ type, questionList,  setQuestionList }) => {
   const { value: newQuestion, onChange, setValue } = useInput('');
-  const { questionList, addQuestion, deleteQuestion, modifyQuestion } =
-    useQuestionListHandler(type);
 
   const questions = questionList.map((q: Question, idx: number) => (
     <QuestionElement
       key={idx + q}
       question={q}
-      modifyQuestion={(newQ: Question) => modifyQuestion(newQ, idx)}
-      deleteQuestion={() => {
-        deleteQuestion(idx);
-      }}
+      modifyQuestion={(newQ: Question) => {modifyQuestion(idx, newQ)}}
+      deleteQuestion={() => {deleteQuestion(idx)}}
     />
   ));
 
@@ -60,36 +58,18 @@ const QuestionList: FC<QuestionListProps> = ({ type }) => {
       </S.QuestionList>
     </S.QuestionListSection>
   );
+
+  function deleteQuestion(idx: number) {
+    return setQuestionList(type, questionList.filter((_, i) => idx !== i));
+  }
+
+  function modifyQuestion(idx: number, question: Question) {
+    return setQuestionList(type, questionList.map((q, i) => idx === i ? question : q));
+  }
+  function addQuestion(question: Question) {
+    questionList.push(question);
+    return setQuestionList(type, questionList);
+  }
 };
-
-function useQuestionListHandler(type: QuestionType) {
-  const questionSetKey = getQuestionSetKey();
-  const [questionSet, setQuestionSet] = useLocalStorage<QuestionSet>(
-    questionSetKey,
-    { begin: [], essential: [], random: [], end: [] },
-  );
-  const questionList = questionSet[type];
-
-  const modifyQuestion = (newQ: Question, idx: number) => {
-    questionSet[type] = questionList.map((question: Question, i: number) =>
-      idx === i ? newQ : question,
-    );
-
-    setQuestionSet({
-      ...questionSet,
-    });
-  };
-
-  const addQuestion = (newQuestion: Question) => {
-    questionSet[type].push(newQuestion);
-    setQuestionSet({ ...questionSet });
-  };
-
-  const deleteQuestion = (idx: number) => {
-    questionSet[type] = questionList.filter((_, i: number) => i !== idx);
-    setQuestionSet({ ...questionSet });
-  };
-  return { questionList, modifyQuestion, addQuestion, deleteQuestion };
-}
 
 export default QuestionList;
