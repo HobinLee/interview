@@ -7,3 +7,5 @@ export { default as useReducerWithoutDispatch } from './useReducerWithoutDispatc
 export { default as useQuestion } from './useQuestion';
 export { default as useLocalStorage } from './useLocalStorage';
 export { default as useRecord } from './useRecord';
+export { default as useDialog } from './useDialog';
+

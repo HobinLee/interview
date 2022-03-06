@@ -1,3 +1,4 @@
+import { toast } from '@src/dialog';
 import { useEffect, useRef, useState } from 'react';
 import { useRecordWebcam } from 'react-record-webcam';
 import { useReducerWithoutDispatch } from '.';
@@ -28,6 +29,7 @@ export default (isEndQuestion: boolean) => {
 
     if (status === 'ERROR') {
       if(isReadyToRecord) {
+        toast('동영상 저장에 실패했습니다');
         addToRecordList(null);
       } else {
         setPermission(false);
