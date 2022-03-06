@@ -5,8 +5,9 @@ interface PlayerProps {
   record: Blob | null;
 }
 
-export const RecordPlayer: VFC<PlayerProps> = ({ record }) => (
-  <S.VideoWrap>
-    {record && <S.RecordVideo src={URL.createObjectURL(record)} autoPlay />}
-  </S.VideoWrap>
-);
+export const RecordPlayer: VFC<PlayerProps> = ({ record }) => {
+ return(<S.VideoWrap>
+  {record && <S.RecordVideo width='' height='' url={URL.createObjectURL(record)} controls={true}/>}
+
+</S.VideoWrap>);
+}
