@@ -34,6 +34,9 @@ export const CameraWrap = styled.div`
   height: 28vw;
   min-width: 400px;
   overflow: hidden;
+  display:flex;
+  align-items: center;
+  justify-content: center;
 
   ${media('tablet')} {
     width: 80vw;

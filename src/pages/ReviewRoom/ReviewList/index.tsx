@@ -1,6 +1,7 @@
 import { Button, Typography } from '@src/components/atoms';
 import { getAnswerList } from '@src/stores/answer';
 import { getRecordList } from '@src/stores/records';
+import { toSec } from '@src/utils/utils';
 import { VFC } from 'react';
 import * as S from './styles';
 
@@ -15,20 +16,18 @@ export const ReviewList: VFC<Props> = ({ playThisVideo }) => {
   const answers = answerList.map((answer, idx) => (
     <S.ReviewListElement key={idx}>
       <S.QuestionWrap>
-        <Typography fontSize="normal" fontWeight="bold" ellipsis>
+        <Typography fontSize="small">
           {answer.question}
         </Typography>
       </S.QuestionWrap>
-      <S.TimeWrap>
-        <Typography>{answer.time}'</Typography>
-      </S.TimeWrap>
-      <Button
+      <Typography fontSize="small">{toSec(answer.time)}'</Typography>
+      <S.PlayButton
         color="gray"
         onClick={() => playThisVideo(recordList[idx])}
         disabled={!recordList[idx]}
       >
         보기
-      </Button>
+      </S.PlayButton>
     </S.ReviewListElement>
   ));
 

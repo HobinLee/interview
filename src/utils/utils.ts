@@ -20,3 +20,7 @@ export function shuffle<T>(arr: T[]): T[] {
 export function draw<T>(arr: T[], n: number): T[] {
   return shuffle(arr).slice(0, n);
 }
+
+export function toSec(time: number) {
+  return Math.floor(time);
+}

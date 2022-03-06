@@ -17,8 +17,6 @@ export const RecordVideo = styled(ReactPlayer)`
 `;
 
 export const VideoWrap = styled.section`
-  min-width: 550px;
-
   ${media('pc')} {
     max-width: 100%;
     width: 100%;
