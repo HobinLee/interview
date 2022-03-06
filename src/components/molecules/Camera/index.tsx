@@ -1,6 +1,6 @@
 import { Typography } from '@src/components/atoms';
 import { colors } from '@src/styles/variables';
-import { useEffect, useState, VFC } from 'react';
+import { useEffect, useRef, useState, VFC } from 'react';
 import { useRecordWebcam } from 'react-record-webcam';
 import Webcam from 'react-webcam';
 import styled from 'styled-components';
@@ -10,11 +10,14 @@ const PermissionNeed = () => (<SkeletonWrap>
   </SkeletonWrap>);
 
 export default () => {
-  const { status, open } = useRecordWebcam();
+  const { status, open, close } = useRecordWebcam();
   const [permission, setPermission] = useState<boolean>(true);
 
   useEffect(() => {
     open();
+    return () => {
+      close();
+    }
   }, [])
 
   useEffect(() => {

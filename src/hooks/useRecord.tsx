@@ -14,10 +14,13 @@ export default (isEndQuestion: boolean) => {
 
   useEffect(() => {
     open();
+    return () => {
+      close();
+    }
   }, []);
 
   useEffect(() => {
-    if(!permission) return;
+    if(!permission || !webcamRef) return;
 
     if (!recordList.length && status === 'OPEN') {
       ready();

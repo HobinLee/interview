@@ -37,7 +37,6 @@ const InterviewRoom: FC = () => {
   }, []);
 
   useEffect(() => {
-    console.log('now ready');
     readyToInterview && play();
   }, [readyToInterview]);
 
