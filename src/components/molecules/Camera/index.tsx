@@ -33,6 +33,7 @@ const CameraWrap = styled(Webcam)`
   height: 100%;
   width: auto;
   transform: scaleX(-1);
+  border-radius: 1rem;
 `;
 
 const SkeletonWrap = styled.div`
@@ -43,6 +44,7 @@ const SkeletonWrap = styled.div`
   display: flex;
   justify-column: center;
   align-items: center;
+  border-radius: 1rem;
 
   & > div {
     width: 100%;

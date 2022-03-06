@@ -1,5 +1,4 @@
 import { media } from '@src/styles/mixins';
-import { colors } from '@src/styles/variables';
 import ReactPlayer from 'react-player/lazy';
 import styled from 'styled-components';
 

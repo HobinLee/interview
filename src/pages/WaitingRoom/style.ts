@@ -25,9 +25,6 @@ export const WaintingRoomContent = styled.div`
   ${media('tablet')} {
     flex-direction: column;
   }
-  > div {
-    border-radius: 1rem;
-  }
 `;
 
 export const CameraWrap = styled.div`
