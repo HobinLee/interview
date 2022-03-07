@@ -12,7 +12,6 @@ import { useAnswerState } from '@src/stores/answer';
 import { Seconds } from '@src/types/common';
 import { Question } from '@src/types/question';
 import { standbyState } from '@src/stores/interview';
-import { useRecordState } from '@src/stores/records';
 
 const InterviewRoom: FC = () => {
   const { question, shuffleQuestion, nextQuestion } = useQuestion();
@@ -22,19 +21,11 @@ const InterviewRoom: FC = () => {
     startInterview: () => true,
   });
   const [standby, setStandby] = useRecoilState(standbyState);
-  const { isLoading, audio, play } = useAudio(EnterSFX, false);
-  const { recorder, startRecord, stopRecord, recordList, isReadyToRecord } = useRecord(
+  const { isLoading: isLoadingAudio, audio, play } = useAudio(EnterSFX, false);
+  const { recorder, startRecord, stopRecord, isLoading: isLoadingRecord } = useRecord(
     isInterviewing && !question,
   );
-  const { setRecordList, initRecordList } = useRecordState();
-  const readyToInterview = isReadyToRecord && !isLoading;
-
-  useEffect(() => {
-    initRecordList();
-    return () => {
-      setRecordList([...recordList]);
-    };
-  }, []);
+  const readyToInterview = !isLoadingAudio && !isLoadingRecord;
 
   useEffect(() => {
     readyToInterview && play();
