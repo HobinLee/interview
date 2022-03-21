@@ -25,11 +25,10 @@ const InterviewRoom: FC = () => {
   const { recorder, startRecord, stopRecord, isLoading: isLoadingRecord } = useRecord(
     isInterviewing && !question,
   );
-  const readyToInterview = !isLoadingAudio && !isLoadingRecord;
 
   useEffect(() => {
-    readyToInterview && play();
-  }, [readyToInterview]);
+    isLoadingRecord && isLoadingAudio && play();
+  }, [isLoadingAudio, isLoadingRecord]);
 
   useEffect(() => {
     if (!isInterviewing) return;
@@ -43,7 +42,7 @@ const InterviewRoom: FC = () => {
 
   return (
     <S.InterviewRoom>
-      {!readyToInterview ? (
+      {isLoadingAudio || isLoadingRecord ? (
         <LoadingIndicator />
       ) : (
         <>

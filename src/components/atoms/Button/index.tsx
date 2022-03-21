@@ -24,26 +24,26 @@ const Button: FC<ButtonProps & ButtonHTMLAttributes<HTMLButtonElement>> = ({
   className,
   fontSize = 'default',
   color = 'gray',
-  isFilled,
+  isFilled = false,
   block = false,
   borderRadius = 'small',
   children,
   onClick,
   disabled,
-  padding,
-  margin,
+  padding = '0.5rem 1rem',
+  margin = '',
 }) => (
   <ButtonWrap
     onClick={onClick}
     className={className}
     fontSize={fontSize}
     color={color}
-    isFilled={isFilled ?? false}
+    isFilled={isFilled}
     block={block}
     borderRadius={borderRadius}
     disabled={disabled}
-    padding={padding ?? '0.5rem 1rem'}
-    margin={margin ?? ''}
+    padding={padding}
+    margin={margin}
   >
     {children}
   </ButtonWrap>

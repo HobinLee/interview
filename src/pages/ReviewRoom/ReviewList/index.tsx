@@ -1,9 +1,16 @@
-import { Button, Typography } from '@src/components/atoms';
+import { Typography } from '@src/components/atoms';
 import { getAnswerList } from '@src/stores/answer';
 import { getRecordList } from '@src/stores/records';
 import { toSec } from '@src/utils/utils';
 import { VFC } from 'react';
 import * as S from './styles';
+
+import { Answer } from '@src/types/answer';
+import { AiFillPlayCircle, AiOutlinePlayCircle } from 'react-icons/ai';
+
+const mockups: Answer[] = [
+
+]
 
 interface Props {
   playThisVideo: (record: Blob | null) => void;
@@ -15,19 +22,21 @@ export const ReviewList: VFC<Props> = ({ playThisVideo }) => {
 
   const answers = answerList.map((answer, idx) => (
     <S.ReviewListElement key={idx}>
+      <S.PlayButton
+        onClick={() => playThisVideo(recordList[idx])}
+        disabled={!recordList[idx]}
+      >
+        <AiOutlinePlayCircle
+          color='gray'
+          strokeWidth={'3px'}
+        />
+      </S.PlayButton>
       <S.QuestionWrap>
         <Typography fontSize="small">
           {answer.question}
         </Typography>
       </S.QuestionWrap>
       <Typography fontSize="small">{toSec(answer.time)}'</Typography>
-      <S.PlayButton
-        color="gray"
-        onClick={() => playThisVideo(recordList[idx])}
-        disabled={!recordList[idx]}
-      >
-        보기
-      </S.PlayButton>
     </S.ReviewListElement>
   ));
 

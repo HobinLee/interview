@@ -7,8 +7,8 @@ interface ImageProps {
   alt?: string;
 }
 
-const Image: VFC<ImageProps> = ({ src, onClick, alt }) => (
-  <ImageWrapper src={src} onClick={onClick} alt={alt ?? ''}></ImageWrapper>
+const Image: VFC<ImageProps> = ({ src, onClick, alt = '' }) => (
+  <ImageWrapper src={src} onClick={onClick} alt={alt}></ImageWrapper>
 );
 
 export default Image;

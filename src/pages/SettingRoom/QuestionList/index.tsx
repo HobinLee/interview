@@ -14,17 +14,8 @@ export type QuestionListProps = {
   setQuestionList: SetQusetionList;
 };
 
-const QuestionList: FC<QuestionListProps> = ({ type, questionList,  setQuestionList }) => {
+const QuestionListSection: FC<QuestionListProps> = ({ type, questionList,  setQuestionList }) => {
   const { value: newQuestion, onChange, setValue } = useInput('');
-
-  const questions = questionList.map((q: Question, idx: number) => (
-    <QuestionElement
-      key={idx + q}
-      question={q}
-      modifyQuestion={(newQ: Question) => {modifyQuestion(idx, newQ)}}
-      deleteQuestion={() => {deleteQuestion(idx)}}
-    />
-  ));
 
   return (
     <S.QuestionListSection>
@@ -54,22 +45,35 @@ const QuestionList: FC<QuestionListProps> = ({ type, questionList,  setQuestionL
             추가
           </Button>
         </S.AddQuestionWrap>
-        {questions}
+        <Questions />
       </S.QuestionList>
     </S.QuestionListSection>
   );
 
-  function deleteQuestion(idx: number) {
-    return setQuestionList(type, questionList.filter((_, i) => idx !== i));
-  }
 
-  function modifyQuestion(idx: number, question: Question) {
-    return setQuestionList(type, questionList.map((q, i) => idx === i ? question : q));
-  }
+  function Questions() {
+    return (<>
+      {questionList.map((q: Question, idx: number) => (
+        <QuestionElement
+          key={idx + q}
+          question={q}
+          modifyQuestion={(newQ: Question) => {modifyQuestion(idx, newQ)}}
+          deleteQuestion={() => {deleteQuestion(idx)}}
+        />))}
+    </>)
+    function deleteQuestion(idx: number) {
+      return setQuestionList(type, questionList.filter((_, i) => idx !== i));
+    }
+  
+    function modifyQuestion(idx: number, question: Question) {
+      return setQuestionList(type, questionList.map((q, i) => idx === i ? question : q));
+    }
+  } 
+
   function addQuestion(question: Question) {
     questionList.push(question);
     return setQuestionList(type, questionList);
   }
 };
 
-export default QuestionList;
+export default QuestionListSection;

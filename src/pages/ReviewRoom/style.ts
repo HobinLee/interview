@@ -22,6 +22,7 @@ export const ReviewRoomBody = styled.section`
 
   & > section {
     margin: 0 1rem;
+    flex-basis: 50%;
   }
 
   ${media('pc')} {

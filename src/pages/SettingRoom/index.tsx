@@ -5,15 +5,17 @@ import { HomeButton } from '@src/components/molecules';
 import { getQuestionSetKey } from '@src/stores/question';
 import { useLocalStorage } from '@src/hooks';
 import { Question, QuestionSet } from '@src/types/question';
-import { questionTypeInfo, QuestionType } from './QuestionList/data';
+import { QuestionType } from './QuestionList/data';
 
 const SettingRoom: FC = () => {
   const [questionSet, setQuestionList] = useQuestionSetHandler();
+
   return (<S.SettingRoom>
     <S.SettingRoomBody>
-      {(Object.keys(questionTypeInfo) as QuestionType[]).map((type: QuestionType) => 
-        <QuestionList key={type} type={type} questionList={questionSet[type]} setQuestionList={setQuestionList}/>)
-      }
+      <QuestionList type={'begin'} questionList={questionSet.begin} setQuestionList={setQuestionList}/>
+      <QuestionList type={'essential'} questionList={questionSet.essential} setQuestionList={setQuestionList}/>
+      <QuestionList type={'random'} questionList={questionSet.random} setQuestionList={setQuestionList}/>
+      <QuestionList type={'end'} questionList={questionSet.end} setQuestionList={setQuestionList}/>
     </S.SettingRoomBody>
     <HomeButton />
   </S.SettingRoom>)

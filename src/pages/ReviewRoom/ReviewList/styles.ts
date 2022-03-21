@@ -35,8 +35,19 @@ export const ReviewListElement = styled.li`
 `;
 
 export const PlayButton = styled(Button)`
-  ${media('mobile')} {
-    font-size: ${sizes.font.small};
-    padding: 0.2rem 0.4rem;
+  padding: 0;
+  margin-right: 1rem;
+  border: none;
+  background-color: none;
+  width: 2rem;
+  height: 2rem;
+
+  & > svg {
+    width: 100%;
+    height: auto;
+  }
+
+  &: hover {
+    background-color: none;
   }
 `
