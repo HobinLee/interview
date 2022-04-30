@@ -1,4 +1,4 @@
-import { useDialog } from '@src/hooks';
+import { useDialog, useDidMount } from '@src/hooks';
 import { DialogProps } from '@src/types/dialog';
 import { FC, MouseEventHandler, ReactElement, ReactEventHandler, useRef } from 'react';
 import styled from 'styled-components';
@@ -11,18 +11,18 @@ export const blockClick: ReactEventHandler = e => e.stopPropagation();
 
 export const Dialog: FC<DialogProps> = ({ children, ...dialogProps }) => {
   const ref = useRef(null);
-  const { destroy, close, isVisible } = useDialog(ref, dialogProps);
+  const { isExist, isVisible, close } = useDialog(ref, dialogProps);
 
   const closeAndStopPropagation: MouseEventHandler = e => {
     close();
     e.stopPropagation();
   };
 
-  return destroy ? null : (
+  return isExist ? (
     <Backdrop ref={ref} isVisible={isVisible} onClick={closeAndStopPropagation}>
       <DialogWrap onClick={blockClick}>{children}</DialogWrap>
     </Backdrop>
-  );
+  ) : null;
 };
 
 export const Backdrop = styled.div<{ isVisible: boolean }>`
@@ -79,7 +79,8 @@ export const Dialogs: FC = () => {
   const dialogList = useRef<ReactElement[]>([]).current;
   const [, setDialogNum] = useState(0);
 
-  useEffect(() => {
+  useDidMount(() => {
+
     window.addEventListener(EVENT_OPEN_DIALOG, addDialog);
     return () => window.removeEventListener(EVENT_OPEN_DIALOG, addDialog);
 
@@ -92,7 +93,7 @@ export const Dialogs: FC = () => {
 
       setDialogNum(dialogList.length);
     }
-  }, []);
+  })
 
   return <>{dialogList}</>;
 };

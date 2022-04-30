@@ -1,6 +1,6 @@
 import { Button, Input, Typography } from '@src/components/atoms';
-import { FC, useState } from 'react';
-import { useInput, useReducerWithoutDispatch } from '@src/hooks';
+import { FC } from 'react';
+import { useBoolean, useInput } from '@src/hooks';
 import * as S from './style';
 import { Question } from '@src/types/question';
 
@@ -15,13 +15,8 @@ const QuestionElement: FC<QuestionProps> = ({
   modifyQuestion,
   deleteQuestion,
 }) => {
-  const [isModifying, [startModify, endModify]] = useReducerWithoutDispatch(
-    false,
-    {
-      startModify: () => true,
-      endModify: () => false,
-    },
-  );
+  const [isModifying, startModify, endModify] = useBoolean(false);
+
   const {
     value: modifiedQuestion,
     onChange: handleModifiedQuestion,

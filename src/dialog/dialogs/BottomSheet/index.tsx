@@ -14,14 +14,14 @@ const BottomSheet: FC<BottomSheetProps> = ({
   ...dialogProps
 }) => {
   const ref = useRef(null);
-  const { destroy, close, isVisible } = useDialog(ref, dialogProps);
+  const { isExist, isVisible, close } = useDialog(ref, dialogProps);
 
   const closeAndStopPropagation: MouseEventHandler = e => {
     close();
     e.stopPropagation();
   };
 
-  return destroy ? null : (
+  return isExist ? null : (
     <Backdrop ref={ref} isVisible={isVisible} onClick={closeAndStopPropagation}>
       <S.BottomSheetWrap isVisible={isVisible} onClick={blockClick}>
         {children({ close })}

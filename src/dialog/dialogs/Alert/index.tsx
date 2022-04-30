@@ -10,15 +10,14 @@ interface AlertProps {
 
 const Alert: FC<AlertProps> = ({ message, onClose }) => {
   const ref = useRef(null);
-
-  const { close, destroy, isVisible } = useDialog(ref, { onClose });
+  const { isExist, isVisible, close } = useDialog(ref, { onClose });
 
   const closeWithStopPropagation: MouseEventHandler = e => {
     close();
     e.stopPropagation();
   };
 
-  return destroy ? null : (
+  return isExist ? (
     <Backdrop
       ref={ref}
       isVisible={isVisible}
@@ -29,7 +28,7 @@ const Alert: FC<AlertProps> = ({ message, onClose }) => {
         <S.DialogButton onClick={closeWithStopPropagation}>확인</S.DialogButton>
       </S.ConfirmWrap>
     </Backdrop>
-  );
+  ) : null;
 };
 
 export default Alert;

@@ -1,11 +1,8 @@
 import * as S from './style';
-import QuestionList, { SetQusetionList } from './QuestionList';
+import QuestionList from './QuestionList';
+import useQuestionSetHandler from './hooks';
 import { FC } from 'react';
 import { HomeButton } from '@src/components/molecules';
-import { getQuestionSetKey } from '@src/stores/question';
-import { useLocalStorage } from '@src/hooks';
-import { Question, QuestionSet } from '@src/types/question';
-import { QuestionType } from './QuestionList/data';
 
 const SettingRoom: FC = () => {
   const [questionSet, setQuestionList] = useQuestionSetHandler();
@@ -22,19 +19,3 @@ const SettingRoom: FC = () => {
 }
 
 export default SettingRoom;
-
-function useQuestionSetHandler(): [QuestionSet, SetQusetionList] {
-  const questionSetKey = getQuestionSetKey();
-  const [questionSet, setQuestionSet] = useLocalStorage<QuestionSet>(
-    questionSetKey,
-    { begin: [], essential: [], random: [], end: [] },
-  );
-
-  const setQuestionList = (type: QuestionType, questionList: Question[]) => {
-    setQuestionSet({
-      ...questionSet, [type]: questionList
-    })
-  };
-
-  return [ questionSet, setQuestionList ];
-}

@@ -1,17 +1,15 @@
 import { toast } from '@src/dialog';
 import { useRecordState } from '@src/stores/records';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { useRecordWebcam } from 'react-record-webcam';
-import { useReducerWithoutDispatch } from '.';
+import useBoolean from './useBoolean';
 
 export default (isEndQuestion: boolean) => {
-  const [permission, setPermission] = useState(true);
+  const [permission, _, refusePermission] = useBoolean(true);
   const { webcamRef, start, status, open, stop, getRecording } =
     useRecordWebcam();
   const recordList = useRef<(Blob | null)[]>([]).current;
-  const [isLoading, [ready]] = useReducerWithoutDispatch(true, {
-    ready: () => false,
-  });
+  const [isReady, ready] = useBoolean(false);
   const { setRecordList, initRecordList } = useRecordState();
 
   useEffect(() => {
@@ -35,12 +33,12 @@ export default (isEndQuestion: boolean) => {
     }
 
     if (status === 'ERROR') {
-      if(isLoading) {
-        setPermission(false);
-        ready();
-      } else {
+      if(isReady) {
         toast('동영상 저장에 실패했습니다');
         addToRecordList(null);
+      } else {
+        refusePermission();
+        ready();
       }
     }
 
@@ -73,6 +71,6 @@ export default (isEndQuestion: boolean) => {
     },
     recordList,
     recorder: <video style={{ display: 'none' }} ref={webcamRef} />,
-    isLoading
+    isLoading: !isReady
   };
 };

@@ -1,10 +1,13 @@
 import useReducerWithoutDispatch from "./useReducerWithoutDispatch";
 
-export default function(defautValue = true): [boolean, () => void, () => void] {
-  const [value, [turnOn, turnOff]] = useReducerWithoutDispatch(defautValue, {
-    turnOn: () => true,
-    turnOff: () => false
+type TrueSetter = () => void;
+type FalseSetter = () => void;
+
+export default function(defautValue = true): [boolean, TrueSetter, FalseSetter] {
+  const [value, [setTrue, setFalse]] = useReducerWithoutDispatch(defautValue, {
+    setTrue: () => true,
+    setFalse: () => false
   });
 
-  return [value, turnOn, turnOff];
+  return [value, setTrue, setFalse];
 }

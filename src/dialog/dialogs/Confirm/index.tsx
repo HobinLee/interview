@@ -1,5 +1,5 @@
 import { Backdrop, blockClick } from '@src/dialog';
-import { useDialog } from '@src/hooks';
+import { useBoolean, useDialog } from '@src/hooks';
 import { FC, MouseEventHandler, useEffect, useRef, useState } from 'react';
 import * as S from './styles'
 
@@ -11,26 +11,25 @@ interface ConfirmProps {
 
 const Confirm: FC<ConfirmProps> = ({ message, onCancel, onConfirm }) => {
   const ref = useRef(null);
-  const [confirm, setConfirm] = useState(false);
-
-  const { close, destroy, isVisible } = useDialog(ref);
+  const [isConfirm, confirm] = useBoolean(false);
+  const { isExist, isVisible, close } = useDialog(ref);
 
   useEffect(() => {
-    if (destroy) {
-      if (confirm) {
+    if (!isExist) {
+      if (isConfirm) {
         onConfirm?.();
       } else {
         onCancel?.();
       }
     }
-  }, [destroy]);
+  }, [isExist]);
 
   const closeWithStopPropagation: MouseEventHandler = e => {
     close();
     e.stopPropagation();
   };
 
-  return destroy ? null : (
+  return isExist ? (
     <Backdrop
       ref={ref}
       isVisible={isVisible}
@@ -43,7 +42,7 @@ const Confirm: FC<ConfirmProps> = ({ message, onCancel, onConfirm }) => {
           <S.DialogButton
             onClick={(e: React.MouseEvent<Element, MouseEvent>) => {
               closeWithStopPropagation(e);
-              setConfirm(true);
+              confirm();
             }}
           >
             확인
@@ -52,7 +51,7 @@ const Confirm: FC<ConfirmProps> = ({ message, onCancel, onConfirm }) => {
         </S.ButtonWrap>
       </S.ConfirmWrap>
     </Backdrop>
-  );
+  ) : null;
 };
 
 export default Confirm;

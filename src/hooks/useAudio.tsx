@@ -1,16 +1,14 @@
-import { useRef, useState } from 'react';
-import { useReducerWithoutDispatch } from '.';
+import { useRef } from 'react';
+import useBoolean from './useBoolean';
 
 export default (src: string, autoPlay?: boolean) => {
-  const [isLoading, [ready]] = useReducerWithoutDispatch(true, {
-    ready: () => false
-  });
+  const [isReady,ready] = useBoolean(false);
   const audioRef = useRef<HTMLAudioElement>(null);
 
   const play = () => {
     if(!audioRef.current) return;
 
-    if (!isLoading) {
+    if (isReady) {
       audioRef.current.play();
     } else {
       onloadeddata = () => {
@@ -21,13 +19,13 @@ export default (src: string, autoPlay?: boolean) => {
   }
 
   return {
-    isLoading,
+    isLoading: !isReady,
     audio: (
       <audio
         ref={audioRef}
         src={src}
         autoPlay={autoPlay}
-        onLoadedData={() => ready()}
+        onLoadedData={ready}
       />
     ),
     play

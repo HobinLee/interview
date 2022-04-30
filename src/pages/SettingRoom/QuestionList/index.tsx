@@ -1,5 +1,5 @@
 import * as S from './style';
-import { FC } from 'react';
+import { FC, useCallback, VFC } from 'react';
 import { useInput, useLocalStorage } from '@src/hooks';
 import QuestionElement from '../Question';
 import { Button, Input, Typography } from '@src/components/atoms';
@@ -16,6 +16,26 @@ export type QuestionListProps = {
 
 const QuestionListSection: FC<QuestionListProps> = ({ type, questionList,  setQuestionList }) => {
   const { value: newQuestion, onChange, setValue } = useInput('');
+
+  const Questions: VFC = useCallback(() => {
+    return (<>
+      {questionList.map((q: Question, idx: number) => (
+        <QuestionElement
+          key={idx + q}
+          question={q}
+          modifyQuestion={(newQ: Question) => {modifyQuestion(idx, newQ)}}
+          deleteQuestion={() => {deleteQuestion(idx)}}
+        />))}
+    </>)
+  
+    function deleteQuestion(idx: number) {
+      return setQuestionList(type, questionList.filter((_, i) => idx !== i));
+    }
+  
+    function modifyQuestion(idx: number, question: Question) {
+      return setQuestionList(type, questionList.map((q, i) => idx === i ? question : q));
+    }
+  }, [questionList]);
 
   return (
     <S.QuestionListSection>
@@ -49,26 +69,6 @@ const QuestionListSection: FC<QuestionListProps> = ({ type, questionList,  setQu
       </S.QuestionList>
     </S.QuestionListSection>
   );
-
-
-  function Questions() {
-    return (<>
-      {questionList.map((q: Question, idx: number) => (
-        <QuestionElement
-          key={idx + q}
-          question={q}
-          modifyQuestion={(newQ: Question) => {modifyQuestion(idx, newQ)}}
-          deleteQuestion={() => {deleteQuestion(idx)}}
-        />))}
-    </>)
-    function deleteQuestion(idx: number) {
-      return setQuestionList(type, questionList.filter((_, i) => idx !== i));
-    }
-  
-    function modifyQuestion(idx: number, question: Question) {
-      return setQuestionList(type, questionList.map((q, i) => idx === i ? question : q));
-    }
-  } 
 
   function addQuestion(question: Question) {
     questionList.push(question);

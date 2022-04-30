@@ -1,7 +1,7 @@
-import { FC, useEffect, useReducer } from 'react';
+import { FC, useEffect } from 'react';
 import * as S from './style';
 import EnterSFX from '@src/assets/audios/enter.mp3';
-import { useAudio, useReducerWithoutDispatch, useStopwatch } from '@src/hooks';
+import { useAudio, useBoolean, useStopwatch } from '@src/hooks';
 import { LoadingIndicator } from './Loading';
 import { InterviewRoomBody } from './Body';
 import { InterviewRoomFooter } from './Footer';
@@ -17,9 +17,7 @@ const InterviewRoom: FC = () => {
   const { question, shuffleQuestion, nextQuestion } = useQuestion();
   const { initAnswerList, addAnswer } = useAnswerControl();
   const { startStopWatch, getStopWatchTime } = useStopwatch();
-  const [isInterviewing, [startInterview]] = useReducerWithoutDispatch(false, {
-    startInterview: () => true,
-  });
+  const [isInterviewing, startInterview] = useBoolean(false);
   const [standby, setStandby] = useRecoilState(standbyState);
   const { isLoading: isLoadingAudio, audio, play } = useAudio(EnterSFX, false);
   const { recorder, startRecord, stopRecord, isLoading: isLoadingRecord } = useRecord(
