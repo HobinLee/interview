@@ -1,46 +1,25 @@
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 import * as S from './style';
-import EnterSFX from '@src/assets/audios/enter.mp3';
-import { useAudio, useBoolean, useStopwatch } from '@src/hooks';
 import { LoadingIndicator } from './Loading';
 import { InterviewRoomBody } from './Body';
 import { InterviewRoomFooter } from './Footer';
 import { IndicationBox } from './IndicationBox';
-import { useQuestion, useRecord } from '@src/hooks';
-import { useRecoilState } from 'recoil';
-import { useAnswerState } from '@src/stores/answer';
-import { Seconds } from '@src/types/common';
-import { Question } from '@src/types/question';
-import { standbyState } from '@src/stores/interview';
+import useInterviewRoomState from './hooks';
 
 const InterviewRoom: FC = () => {
-  const { question, shuffleQuestion, nextQuestion } = useQuestion();
-  const { initAnswerList, addAnswer } = useAnswerControl();
-  const { startStopWatch, getStopWatchTime } = useStopwatch();
-  const [isInterviewing, startInterview] = useBoolean(false);
-  const [standby, setStandby] = useRecoilState(standbyState);
-  const { isLoading: isLoadingAudio, audio, play } = useAudio(EnterSFX, false);
-  const { recorder, startRecord, stopRecord, isLoading: isLoadingRecord } = useRecord(
-    isInterviewing && !question,
-  );
-
-  useEffect(() => {
-    isLoadingRecord && isLoadingAudio && play();
-  }, [isLoadingAudio, isLoadingRecord]);
-
-  useEffect(() => {
-    if (!isInterviewing) return;
-
-    if (!standby) {
-      startRecord();
-      startStopWatch();
-      return;
-    }
-  }, [standby]);
+  const {
+    isLoading,
+    isInterviewing,
+    audio,
+    recorder,
+    question,
+    handelNextQuestion,
+    handleStartInterview,
+  } = useInterviewRoomState();
 
   return (
     <S.InterviewRoom>
-      {isLoadingAudio || isLoadingRecord ? (
+      {isLoading ? (
         <LoadingIndicator />
       ) : (
         <>
@@ -60,30 +39,6 @@ const InterviewRoom: FC = () => {
       {recorder}
     </S.InterviewRoom>
   );
-
-  function handleStartInterview() {
-    shuffleQuestion();
-    initAnswerList();
-    startInterview();
-  }
-
-  function handelNextQuestion() {
-    addAnswer(question, getStopWatchTime());
-    nextQuestion();
-    setStandby(true);
-    stopRecord();
-  }
 };
 
 export default InterviewRoom;
-
-function useAnswerControl() {
-  const { answerList, setAnswerList, initAnswerList } = useAnswerState();
-
-  return {
-    initAnswerList,
-    addAnswer: (question: Question, time: Seconds) => {
-      setAnswerList([...answerList, { question, time }]);
-    },
-  };
-}

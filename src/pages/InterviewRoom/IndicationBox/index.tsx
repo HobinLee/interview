@@ -17,8 +17,8 @@ export const IndicationBox: FC<IndicationBoxProps> = ({
   question,
   startInterview,
 }) => {
-  const isQuestionEnd = !!question;
   const setStandby = useSetRecoilState(standbyState);
+  const isQuestionEnd = !!question;
 
   // 준비 중
   if (!isInterviewing) {

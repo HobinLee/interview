@@ -1,11 +1,11 @@
 import * as S from './style';
 import QuestionList from './QuestionList';
-import useQuestionSetHandler from './hooks';
+import useQuestionSetState from './hooks';
 import { FC } from 'react';
 import { HomeButton } from '@src/components/molecules';
 
 const SettingRoom: FC = () => {
-  const [questionSet, setQuestionList] = useQuestionSetHandler();
+  const [questionSet, setQuestionList] = useQuestionSetState();
 
   return (<S.SettingRoom>
     <S.SettingRoomBody>

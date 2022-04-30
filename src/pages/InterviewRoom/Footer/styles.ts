@@ -13,6 +13,7 @@ export const InterviewRoomFooter = styled.footer`
   justify-content: center;
   justify-self: flex-end;
 `;
+
 export const StartTimeWrap = styled.span`
   position: absolute;
   left: 2rem;

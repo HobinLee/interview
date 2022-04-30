@@ -2,7 +2,6 @@ import { QuestionSet } from '@src/types/question';
 
 export type QuestionType = keyof QuestionSet;
 
-
 interface Info {
   title: string;
   indication: string;
