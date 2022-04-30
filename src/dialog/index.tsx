@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { cloneElement } from 'react';
 import { Toast } from './dialogs';
+import If from '@src/components/atoms/If';
 
 export const blockClick: ReactEventHandler = e => e.stopPropagation();
 
@@ -18,11 +19,11 @@ export const Dialog: FC<DialogProps> = ({ children, ...dialogProps }) => {
     e.stopPropagation();
   };
 
-  return isExist ? (
+  return <If when={isExist}>
     <Backdrop ref={ref} isVisible={isVisible} onClick={closeAndStopPropagation}>
       <DialogWrap onClick={blockClick}>{children}</DialogWrap>
     </Backdrop>
-  ) : null;
+  </If>
 };
 
 export const Backdrop = styled.div<{ isVisible: boolean }>`

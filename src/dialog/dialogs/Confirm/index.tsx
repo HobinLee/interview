@@ -1,3 +1,4 @@
+import If from '@src/components/atoms/If';
 import { Backdrop, blockClick } from '@src/dialog';
 import { useBoolean, useDialog } from '@src/hooks';
 import { FC, MouseEventHandler, useEffect, useRef, useState } from 'react';
@@ -29,7 +30,7 @@ const Confirm: FC<ConfirmProps> = ({ message, onCancel, onConfirm }) => {
     e.stopPropagation();
   };
 
-  return isExist ? (
+  return <If when={isExist}>
     <Backdrop
       ref={ref}
       isVisible={isVisible}
@@ -51,7 +52,7 @@ const Confirm: FC<ConfirmProps> = ({ message, onCancel, onConfirm }) => {
         </S.ButtonWrap>
       </S.ConfirmWrap>
     </Backdrop>
-  ) : null;
+  </If>
 };
 
 export default Confirm;

@@ -1,3 +1,4 @@
+import If from '@src/components/atoms/If';
 import { useDialog, useDidMount } from '@src/hooks';
 import { FC, useEffect, useRef } from 'react';
 import * as S from './styles'
@@ -18,9 +19,9 @@ export default ({ message }:{ message: string })  => {
     };
   })
 
-  return isExist ? (
+  return <If when={isExist}>
     <S.ToastWrap ref={ref} show={isVisible}>
       {message}
     </S.ToastWrap>
-  ) : null;
+  </If>
 };

@@ -2,6 +2,7 @@ import { FC, MouseEventHandler, useEffect, useRef, useState } from 'react';
 import { Backdrop, blockClick } from '@src/dialog';
 import { useDialog } from '@src/hooks';
 import * as S from '@src/dialog/dialogs/Confirm/styles';
+import If from '@src/components/atoms/If';
 
 interface AlertProps {
   message: string;
@@ -17,7 +18,7 @@ const Alert: FC<AlertProps> = ({ message, onClose }) => {
     e.stopPropagation();
   };
 
-  return isExist ? (
+  return <If when={isExist}>
     <Backdrop
       ref={ref}
       isVisible={isVisible}
@@ -28,7 +29,7 @@ const Alert: FC<AlertProps> = ({ message, onClose }) => {
         <S.DialogButton onClick={closeWithStopPropagation}>확인</S.DialogButton>
       </S.ConfirmWrap>
     </Backdrop>
-  ) : null;
+  </If>
 };
 
 export default Alert;
