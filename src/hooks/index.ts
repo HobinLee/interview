@@ -8,4 +8,8 @@ export { default as useQuestion } from './useQuestion';
 export { default as useLocalStorage } from './useLocalStorage';
 export { default as useRecord } from './useRecord';
 export { default as useDialog } from './useDialog';
+export { default as useDidMount } from './useDidMount';
+export { default as useWillUnmount } from './useWillUnmount';
+export { default as useBoolean } from './useBoolean';
+
 
